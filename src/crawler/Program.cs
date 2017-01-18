@@ -1,12 +1,12 @@
-﻿namespace db.machine.crawler
+﻿namespace bd.machine.crawler
 {
 	using System;
 	using System.Net;
 	using System.Net.Http;
 	using System.Threading;
 	using System.Threading.Tasks;
-	using bd.machine.bal.Implementations;
-	using bd.machine.dal.Implementations;
+	using bal.Implementations;
+	using dal.Implementations;
 
 	class Program
 	{

@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bd.machine.dal", "src\dal\b
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bd.machine.bal", "src\bal\bd.machine.bal.csproj", "{3783DC99-CFF9-48DD-ACEF-2C92ACF3C21E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "db.machine.crawler", "src\crawler\db.machine.crawler.csproj", "{92D3609E-04D6-49C6-B885-0ABA2AB7579A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bd.machine.crawler", "src\crawler\bd.machine.crawler.csproj", "{92D3609E-04D6-49C6-B885-0ABA2AB7579A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2EAFB4F2-72F3-4720-BBBB-1BC9F1D725E2}"
 	ProjectSection(SolutionItems) = preProject
