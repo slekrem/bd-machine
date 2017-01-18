@@ -31,9 +31,7 @@
 				{
 					var rawHtmlTask = GetRawHtmlAsync(uri.Value);
 					rawHtmlTask.Wait();
-					var sourceCode = rawHtmlTask.Result;
-
-					rawHtmlService.SaveRawHtmlAsByteArray(sourceCode, uri.Key);
+					rawHtmlService.SaveRawHtmlAsByteArray(rawHtmlTask.Result, uri.Key);
 				}
 			}
 		}
