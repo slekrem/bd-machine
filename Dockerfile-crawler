@@ -1,10 +1,15 @@
 FROM resin/rpi-raspbian:latest
 
 RUN apt-get update && apt-get install -y \
-  mono-complete
+  mono-complete \
+  wget \
+  unzip
+ 
+COPY . /root/bd-machine
+WORKDIR /root/bd-machine
 
-WORKDIR /root
-COPY . bd-machine
-RUN xbuild bd-machine/bd.machine.sln
+RUN wget https://github.com/stefanmerkel/bd-machine/releases/download/0.1/packages.zip #todo nuget restore
+RUN unzip packages.zip
+RUN xbuild bd.machine.sln
 
-ENTRYPOINT mono bd-machine/src/crawler/bin/Debug/bd.machine.crawler.exe
+ENTRYPOINT mono src/crawler/bin/Debug/bd.machine.crawler.exe
