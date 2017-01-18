@@ -4,7 +4,7 @@ RUN apt-get update && apt-get install -y \
   mono-complete \
   wget \
   unzip
- 
+
 COPY . /root/bd-machine
 WORKDIR /root/bd-machine
 
