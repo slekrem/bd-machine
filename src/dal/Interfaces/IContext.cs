@@ -24,6 +24,8 @@
 
 		DbSet<RawHtml> RawHtmls { get; set; }
 
+		DbSet<UrlRawHtml> UrlRawHtml { get; set; }
+
 		int SaveChanges();
 	}
 }

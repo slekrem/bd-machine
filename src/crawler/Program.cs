@@ -1,8 +1,6 @@
 ﻿namespace db.machine.crawler
 {
 	using System;
-	using System.Collections.Generic;
-	using System.Linq;
 	using System.Net;
 	using System.Net.Http;
 	using System.Threading;
@@ -12,23 +10,8 @@
 
 	class Program
 	{
-		public static void Test() 
-		{
-			using (var ctx = new Context("name=MySql")) 
-			{
-				var asd = ctx.Urls.ToList();
-				foreach (var a in asd) 
-				{
-					Console.WriteLine(a.Id);
-				}
-			}
-		}
-		
 		public static void Main(string[] args)
 		{
-			//Test();
-			//return;
-			
 			using (var timer = new Timer(StartCrawling, null, 0, 600000))
 			{
 				Console.WriteLine("Press \'q\' to quit the sample.");
@@ -42,7 +25,7 @@
 			{
 				var unitOfWork = new UnitOfWork(context);
 				var urlService = new UrlService(unitOfWork);
-				var sourceCodeService = new RawHtmlService(unitOfWork);
+				var rawHtmlService = new RawHtmlService(unitOfWork);
 
 				foreach (var uri in urlService.GetAllUris())
 				{
@@ -50,9 +33,7 @@
 					rawHtmlTask.Wait();
 					var sourceCode = rawHtmlTask.Result;
 
-					sourceCodeService.SaveRawHtmlAsByteArray(sourceCode, uri.Key);
-
-					Console.WriteLine(sourceCode);
+					rawHtmlService.SaveRawHtmlAsByteArray(sourceCode, uri.Key);
 				}
 			}
 		}
@@ -69,9 +50,10 @@
 			{
 				Proxy = new WebProxy("torproxy", 8118),
 				UseProxy = true
-			}) { })
+			})
+			{ })
 				sourceCode = await httpClient.GetByteArrayAsync(uri);
 			return sourceCode;
 		}
-}
+	}
 }

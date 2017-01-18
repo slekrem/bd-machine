@@ -21,5 +21,7 @@
 		IUrlMetadataRepository UrlMetadataRepository { get; }
 
 		IUrlRepository UrlRepository { get; }
+
+		IUrlRawHtmlRepository UrlRawHtmlRepository { get; }
 	}
 }

@@ -18,6 +18,7 @@
 		private ISchemeRepository _schemeRepository;
 		private IUrlMetadataRepository _urlMetadataRepository;
 		private IUrlRepository _urlRepository;
+		private IUrlRawHtmlRepository _urlRawHtmlRepository;
 		
 		public IFragmentRepository FragmentRepository 
 		{ 
@@ -106,6 +107,16 @@
 				if (_urlRepository == null)
 					_urlRepository = new UrlRepository(_context);
 				return _urlRepository;
+			}
+		}
+
+		public IUrlRawHtmlRepository UrlRawHtmlRepository 
+		{
+			get 
+			{
+				if (_urlRawHtmlRepository == null)
+					_urlRawHtmlRepository = new UrlRawHtmlRepository(_context);
+				return _urlRawHtmlRepository;
 			}
 		}
 

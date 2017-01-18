@@ -26,8 +26,12 @@
 			var rawHtmlEntry = new RawHtml();
 			rawHtmlEntry.Value = rawHtml;
 			_unitOfWork.RawHtmlRepository.Create(rawHtmlEntry);
-
-			Console.WriteLine(rawHtmlEntry.Id);
+			_unitOfWork.UrlRawHtmlRepository.Create(new UrlRawHtml() 
+			{
+				UrlId = urlId,
+				RawHtmlId = rawHtmlEntry.Id,
+				CreationDate = DateTime.Now
+			});
 		}
 	}
 }

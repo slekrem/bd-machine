@@ -24,6 +24,8 @@
 
 		public DbSet<RawHtml> RawHtmls { get; set; }
 
+		public DbSet<UrlRawHtml> UrlRawHtml { get; set; }
+
 		public Context(string connectionString)
 			: base(connectionString) { }
 	}
