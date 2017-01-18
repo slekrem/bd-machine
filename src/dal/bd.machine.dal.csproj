@@ -77,6 +77,9 @@
     <Compile Include="Implementations\Models\RawHtml.cs" />
     <Compile Include="Interfaces\Repositories\IRawHtmlRepository.cs" />
     <Compile Include="Implementations\Repositories\RawHtmlRepository.cs" />
+    <Compile Include="Implementations\Models\UrlRawHtml.cs" />
+    <Compile Include="Interfaces\Repositories\IUrlRawHtmlRepository.cs" />
+    <Compile Include="Implementations\Repositories\UrlRawHtmlRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
