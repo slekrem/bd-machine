@@ -5,8 +5,8 @@ RUN apt-get update && apt-get install -y \
   mono-xsp4
 
 WORKDIR /root
-COPY . db.machine
-RUN xbuild db.machine/bd.machine.sln
+COPY . bd.machine
+RUN xbuild bd.machine/bd.machine.sln
 
 WORKDIR /root/bd.machine/src/bd.machine.webApp
 ENTRYPOINT xsp4
