@@ -1,0 +1,10 @@
+FROM resin/rpi-raspbian:latest
+
+RUN apt-get update && apt-get install -y \
+  mono-complete
+
+WORKDIR /root
+COPY . db.machine
+RUN xbuild db.machine/bd.machine.sln
+
+ENTRYPOINT mono db.machine/src/crawler/bin/Debug/db.machine.crawler.exe

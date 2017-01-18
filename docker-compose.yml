@@ -1,0 +1,34 @@
+version: '2.0'
+services:
+  torproxy:
+    image: ufud/rpi-torproxy:latest
+    container_name: torproxy
+    restart: always
+    ports:
+      - "9001:9001"
+      - "9030:9030"
+      - "9050:9050"
+      - "8118:8118"
+  mysql:
+    image: hypriot/rpi-mysql:latest
+    container_name: mysql
+    restart: always
+    volumes:
+       - mysql_data:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=toor
+      - MYSQL_DATABASE=BigData
+    ports:
+      - "3306:3306"
+  crawler:
+    container_name: crawler
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile-crawler
+    links:
+      - torproxy
+      - mysql
+volumes:
+    mysql_data:
+

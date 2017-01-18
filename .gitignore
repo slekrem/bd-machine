@@ -1,0 +1,11 @@
+bd.machine.userprefs
+packages
+bd.machine.bal.csproj.user
+src/bal/bin
+src/bal/obj
+db.machine.crawler.csproj.user
+src/crawler/bin
+src/crawler/obj
+bd.machine.dal.csproj.user
+src/dal/bin
+src/dal/obj
