@@ -29,16 +29,16 @@ services:
     links:
       - torproxy
       - mysql
-  webapp:
-    container_name: webapp
-    restart: always
-    build:
-      context: .
-      dockerfile: Dockerfile-webapp
-    links:
-      - mysql
-    ports:
-      - "9000:9000"
+  #webapp:
+    #container_name: webapp
+    #restart: always
+    #build:
+      #context: .
+      #dockerfile: Dockerfile-webapp
+    #links:
+      #- mysql
+    #ports:
+      #- "9000:9000"
 volumes:
     mysql_data:
 
