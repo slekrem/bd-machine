@@ -15,6 +15,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Dockerfile-crawler = Dockerfile-crawler
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bd.machine.webApp", "src\bd.machine.webApp\bd.machine.webApp.csproj", "{66980DBA-9192-4971-819C-287434A000DD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -33,10 +35,15 @@ Global
 		{92D3609E-04D6-49C6-B885-0ABA2AB7579A}.Debug|x86.Build.0 = Debug|x86
 		{92D3609E-04D6-49C6-B885-0ABA2AB7579A}.Release|x86.ActiveCfg = Release|x86
 		{92D3609E-04D6-49C6-B885-0ABA2AB7579A}.Release|x86.Build.0 = Release|x86
+		{66980DBA-9192-4971-819C-287434A000DD}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{66980DBA-9192-4971-819C-287434A000DD}.Debug|x86.Build.0 = Debug|Any CPU
+		{66980DBA-9192-4971-819C-287434A000DD}.Release|x86.ActiveCfg = Release|Any CPU
+		{66980DBA-9192-4971-819C-287434A000DD}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{AC8493F7-3C5E-4271-97AD-177D1EAAD801} = {70EACDE8-4167-4156-9816-D5184CFE0F4E}
 		{3783DC99-CFF9-48DD-ACEF-2C92ACF3C21E} = {70EACDE8-4167-4156-9816-D5184CFE0F4E}
 		{92D3609E-04D6-49C6-B885-0ABA2AB7579A} = {70EACDE8-4167-4156-9816-D5184CFE0F4E}
+		{66980DBA-9192-4971-819C-287434A000DD} = {70EACDE8-4167-4156-9816-D5184CFE0F4E}
 	EndGlobalSection
 EndGlobal
