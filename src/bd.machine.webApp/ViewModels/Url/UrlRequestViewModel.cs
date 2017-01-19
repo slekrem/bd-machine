@@ -7,5 +7,7 @@
 		public string LastRequest { get; set; }
 
 		public string TrafficInKilobyte { get; set; }
+
+		public int RawHtmlId { get; set; }
 	}
 }

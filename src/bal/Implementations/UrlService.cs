@@ -93,7 +93,8 @@
 			{
 				Id = x.Id,
 				RequestDateTime = x.CreationDate,
-				TrafficInKilobyte = x.RawHtml.Value.Length / 1024f
+				TrafficInKilobyte = x.RawHtml.Value.Length / 1024f,
+				RawHtmlId = x.RawHtmlId
 			});
 		}
 

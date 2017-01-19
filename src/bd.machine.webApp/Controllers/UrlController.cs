@@ -71,7 +71,8 @@
 				{
 					Id = x.Id,
 					LastRequest = x.RequestDateTime.ToString(),
-					TrafficInKilobyte = x.TrafficInKilobyte.ToString() + " kB"
+					TrafficInKilobyte = x.TrafficInKilobyte + " kB",
+					RawHtmlId = x.RawHtmlId
 				})
 				.ToPagedList(page, 10);
 		}

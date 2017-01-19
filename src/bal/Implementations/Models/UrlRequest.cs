@@ -9,5 +9,7 @@
 		public DateTime RequestDateTime { get; set; }
 
 		public float TrafficInKilobyte { get; set; }
+
+		public int RawHtmlId { get; set; }
 	}
 }
