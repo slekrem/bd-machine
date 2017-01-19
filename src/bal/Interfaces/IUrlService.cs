@@ -10,5 +10,7 @@
 		int GetCrawledSitesCountByUrlId(int urlId);
 
 		int CreateNewUrl(Uri uri);
+
+		DateTime GetLastRequestDateTimeByUrlId(int urlId);
 	}
 }

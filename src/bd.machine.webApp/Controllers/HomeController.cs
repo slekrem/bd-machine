@@ -31,7 +31,8 @@
 			{
 				Id = uri.Key,
 				Url = uri.Value.ToString(),
-				SitesCount = _urlService.GetCrawledSitesCountByUrlId(uri.Key)
+				SitesCount = _urlService.GetCrawledSitesCountByUrlId(uri.Key),
+				LastRequest = _urlService.GetLastRequestDateTimeByUrlId(uri.Key).ToString()
 			});
 			
 			return View(new HomeIndexViewModel() 

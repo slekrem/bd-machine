@@ -57,6 +57,21 @@
 				.Count();
 		}
 
+		public DateTime GetLastRequestDateTimeByUrlId(int urlId)
+		{
+			if (urlId <= 0)
+				throw new ArgumentNullException("urlId");
+			var lastUrlRawHtmlEntry = _unitOfWork
+				.UrlRawHtmlRepository
+				.UrlRawHtml
+				.Where(x => x.UrlId == urlId)
+				.ToList()
+				.LastOrDefault();
+			if (lastUrlRawHtmlEntry == null)
+				return DateTime.MinValue;
+			return lastUrlRawHtmlEntry.CreationDate;
+		}
+
 		private Uri GetUri(Url url)
 		{
 			if (url == null)

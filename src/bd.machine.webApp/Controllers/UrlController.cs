@@ -46,7 +46,10 @@
 
 		public ActionResult Details(int id) 
 		{
-			throw new NotImplementedException();
+			if (id <= 0)
+				throw new ArgumentOutOfRangeException("id");
+
+			return View();
 		}
 	}
 }
