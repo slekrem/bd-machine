@@ -1,6 +1,8 @@
 ﻿namespace bd.machine.webApp.ViewModels.RawHtml
 {
+	using System.Collections.Generic;
 	using System.ComponentModel.DataAnnotations;
+	using bd.machine.bal.Models.Htmltags;
 
 	public class RawHtmlDetailsViewModel
 	{
@@ -12,5 +14,7 @@
 
 		[Display(Name = "Titel")]
 		public string PageTitle { get; set; }
+
+		public IEnumerable<HtmlMetaTag> HtmlMetaTags { get; set; }
 	}
 }

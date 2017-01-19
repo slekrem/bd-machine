@@ -8,6 +8,8 @@
 	using System.Linq;
 	using System.Text;
 	using HtmlAgilityPack;
+	using bal.Models.Htmltags;
+	using System.Collections.Generic;
 
 	public class RawHtmlService : IRawHtmlService
 	{
@@ -20,13 +22,30 @@
 			_unitOfWork = unitOfWork;
 		}
 
+		public IEnumerable<HtmlMetaTag> GetHtmlMetaTagsFromRawHtml(string rawHtml)
+		{
+			if (string.IsNullOrWhiteSpace(rawHtml))
+				throw new ArgumentNullException("rawHtml");
+			var htmlDocument = new HtmlDocument();
+			htmlDocument.LoadHtml(rawHtml);
+			var metaNodes = htmlDocument.DocumentNode.SelectNodes("//meta");
+			if (metaNodes.Count == 0)
+				return new List<HtmlMetaTag>();
+			return metaNodes
+				.Select(x => new HtmlMetaTag()
+				{
+					Name = x.GetAttributeValue("name", ""),
+					Content = x.GetAttributeValue("content", "")
+				});
+		}
+
 		public string GetHtmlTitleFromRawHtml(string rawHtml)
 		{
 			if (string.IsNullOrWhiteSpace(rawHtml))
 				throw new ArgumentNullException("rawHtml");
 			var htmlDocument = new HtmlDocument();
 			htmlDocument.LoadHtml(rawHtml);
-			var titleNode = htmlDocument.DocumentNode.SelectSingleNode("/html/head/title");
+			var titleNode = htmlDocument.DocumentNode.SelectSingleNode("//title");
 			if (titleNode == null)
 				return string.Empty;
 			return titleNode.InnerHtml;

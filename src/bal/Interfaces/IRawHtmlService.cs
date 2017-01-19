@@ -1,5 +1,7 @@
 ﻿namespace bd.machine.bal.Interfaces
 {
+	using System.Collections.Generic;
+	using Models.Htmltags;
 	using Implementations.Models;
 
 	public interface IRawHtmlService
@@ -9,5 +11,7 @@
 		RawHtmlServiceModel GetRawHtmlRawHtmlServiceModelById(int rawHtmlId);
 
 		string GetHtmlTitleFromRawHtml(string rawHtml);
+
+		IEnumerable<HtmlMetaTag> GetHtmlMetaTagsFromRawHtml(string rawHtml);
 	}
 }
