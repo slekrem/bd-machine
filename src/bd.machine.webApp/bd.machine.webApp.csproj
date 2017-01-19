@@ -89,6 +89,8 @@
     <Compile Include="ViewModels\Home\HomeIndexUrlViewModel.cs" />
     <Compile Include="Controllers\UrlController.cs" />
     <Compile Include="ViewModels\Url\UrlAddViewModel.cs" />
+    <Compile Include="ViewModels\Url\UrlDetailsViewModel.cs" />
+    <Compile Include="ViewModels\Url\UrlRequestViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Web.config" />

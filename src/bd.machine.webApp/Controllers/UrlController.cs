@@ -1,6 +1,8 @@
 ﻿namespace bd.machine.webApp.Controllers
 {
 	using System;
+	using System.Collections.Generic;
+	using System.Linq;
 	using System.Web.Mvc;
 	using bal.Implementations;
 	using bal.Interfaces;
@@ -48,8 +50,25 @@
 		{
 			if (id <= 0)
 				throw new ArgumentOutOfRangeException("id");
+			return View(new UrlDetailsViewModel()
+			{
+				Url = _urlService.GetUriByUrlId(id).ToString(),
+				Requests = GetUrlRequestsByUrlId(id)
+			});
+		}
 
-			return View();
+		IEnumerable<UrlRequestViewModel> GetUrlRequestsByUrlId(int urlId)
+		{
+			if (urlId <= 0)
+				throw new ArgumentOutOfRangeException("urlId");
+			return _urlService
+				.GetUrlRequestsByUrlId(urlId)
+				.OrderByDescending(x => x.RequestDateTime)
+				.Select(x => new UrlRequestViewModel() 
+			{
+				Id = x.Id,
+				LastRequest = x.RequestDateTime.ToString()
+			});
 		}
 	}
 }

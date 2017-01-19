@@ -6,6 +6,7 @@
 	using dal.Implementations.Models;
 	using dal.Interfaces;
 	using Interfaces;
+	using Models;
 
 	public class UrlService : IUrlService
 	{
@@ -70,6 +71,29 @@
 			if (lastUrlRawHtmlEntry == null)
 				return DateTime.MinValue;
 			return lastUrlRawHtmlEntry.CreationDate;
+		}
+
+		public Uri GetUriByUrlId(int urlId)
+		{
+			if (urlId <= 0)
+				throw new ArgumentOutOfRangeException("urlId");
+			return GetUri(_unitOfWork.UrlRepository.Urls.Single(x => x.Id == urlId));
+		}
+
+		public IEnumerable<UrlRequest> GetUrlRequestsByUrlId(int urlId)
+		{
+			if (urlId <= 0)
+				throw new ArgumentOutOfRangeException("urlId");
+			return _unitOfWork
+				.UrlRawHtmlRepository
+				.UrlRawHtml
+				.Where(x => x.UrlId == urlId)
+				.ToList()
+				.Select(x => new UrlRequest() 
+			{
+				Id = x.Id,
+				RequestDateTime = x.CreationDate
+			});
 		}
 
 		private Uri GetUri(Url url)
@@ -188,7 +212,7 @@
 			return query.Id;
 		}
 
-		Nullable<int> GetFragmentIdByUri(Uri uri)
+		private Nullable<int> GetFragmentIdByUri(Uri uri)
 		{
 			if (uri == null)
 				throw new ArgumentNullException("uri");
