@@ -6,5 +6,7 @@
 	public interface IUrlService
 	{
 		IDictionary<int, Uri> GetAllUris();
+
+		int GetCrawledSitesCountByUrlId(int urlId);
 	}
 }

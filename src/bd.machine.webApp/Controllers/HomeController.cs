@@ -6,6 +6,8 @@
 	using bal.Implementations;
 	using dal.Implementations;
 	using dal.Interfaces;
+	using ViewModels.Home;
+	using System.Collections.Generic;
 
 	public class HomeController : Controller
 	{
@@ -22,7 +24,20 @@
 		
 		public ActionResult Index()
 		{
-			return View();
+			var urls = new List<HomeIndexUrlViewModel>();
+			var uris = _urlService.GetAllUris();
+			foreach (var uri in uris)
+				urls.Add(new HomeIndexUrlViewModel()
+			{
+				Id = uri.Key,
+				Url = uri.Value.ToString(),
+				SitesCount = _urlService.GetCrawledSitesCountByUrlId(uri.Key)
+			});
+			
+			return View(new HomeIndexViewModel() 
+			{
+				Urls = urls
+			});
 		}
 	}
 }

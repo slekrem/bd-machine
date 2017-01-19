@@ -28,6 +28,18 @@
 				.ToDictionary(x => x.Id, x => GetUri(x));
 		}
 
+		public int GetCrawledSitesCountByUrlId(int urlId)
+		{
+			if (urlId <= 0)
+				throw new ArgumentOutOfRangeException("urlId");
+
+			return _unitOfWork
+				.UrlRawHtmlRepository
+				.UrlRawHtml
+				.Where(x => x.UrlId == urlId)
+				.Count();
+		}
+
 		private Uri GetUri(Url url)
 		{
 			if (url == null)

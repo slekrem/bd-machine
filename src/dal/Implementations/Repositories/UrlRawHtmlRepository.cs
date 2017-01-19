@@ -4,11 +4,20 @@
 	using Models;
 	using Interfaces;
 	using Interfaces.Repositories;
+	using System.Linq;
 
 	public class UrlRawHtmlRepository : IUrlRawHtmlRepository
 	{
 		private readonly IContext _context;
-		
+
+		public IQueryable<UrlRawHtml> UrlRawHtml
+		{
+			get
+			{
+				return _context.UrlRawHtml;
+			}
+		}
+
 		public UrlRawHtmlRepository(IContext context)
 		{
 			if (context == null)

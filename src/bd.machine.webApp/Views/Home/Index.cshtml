@@ -1,4 +1,6 @@
-﻿<div class="row">
+﻿@model bd.machine.webApp.ViewModels.Home.HomeIndexViewModel
+
+<div class="row">
 	<div class="col-md-12">
 		<div class="panel panel-default">
 			<div class="panel-heading">Urls</div>
@@ -13,11 +15,14 @@
 					</tr>
 				</thead>
 				<tbody>
+					@foreach(var url in Model.Urls)
+					{
 					<tr>
-						<td>1</td>
-						<td>gibip.de</td>
-						<td>234</td>
+						<td>@url.Id</td>
+						<td>@url.Url</td>
+						<td>@url.SitesCount</td>
 					</tr>
+					}
 				</tbody>
 			</table>
 		</div>
