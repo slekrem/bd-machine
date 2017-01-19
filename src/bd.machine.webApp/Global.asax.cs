@@ -1,9 +1,9 @@
-﻿using System.Web;
-using System.Web.Mvc;
-using System.Web.Routing;
-
-namespace bd.machine.webApp
+﻿namespace bd.machine.webApp
 {
+	using System.Web;
+	using System.Web.Mvc;
+	using System.Web.Routing;
+
 	public class Global : HttpApplication
 	{
 		protected void Application_Start()
