@@ -92,7 +92,8 @@
 				.Select(x => new UrlRequest() 
 			{
 				Id = x.Id,
-				RequestDateTime = x.CreationDate
+				RequestDateTime = x.CreationDate,
+				TrafficInKilobyte = x.RawHtml.Value.Length / 1024f
 			});
 		}
 

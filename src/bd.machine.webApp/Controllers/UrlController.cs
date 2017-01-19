@@ -70,7 +70,8 @@
 				.Select(x => new UrlRequestViewModel()
 				{
 					Id = x.Id,
-					LastRequest = x.RequestDateTime.ToString()
+					LastRequest = x.RequestDateTime.ToString(),
+					TrafficInKilobyte = x.TrafficInKilobyte.ToString() + " kB"
 				})
 				.ToPagedList(page, 10);
 		}

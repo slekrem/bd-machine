@@ -7,5 +7,7 @@
 		public int Id { get; set; }
 
 		public DateTime RequestDateTime { get; set; }
+
+		public float TrafficInKilobyte { get; set; }
 	}
 }

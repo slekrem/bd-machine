@@ -5,5 +5,7 @@
 		public int Id { get; set; }
 
 		public string LastRequest { get; set; }
+
+		public string TrafficInKilobyte { get; set; }
 	}
 }
