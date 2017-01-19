@@ -17,7 +17,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					@foreach(var url in Model.Requests)
+					@foreach(var url in Model.RequestPagedList)
 					{
 					<tr>
 						<td>@url.Id</td>
@@ -27,6 +27,18 @@
 					}
 				</tbody>
 			</table>
+			<nav>
+				<ul class="pager">
+					@if(Model.RequestPagedList.HasPreviousPage)
+					{
+					<li>@Html.ActionLink("Neuer", "Details", "Url", new { page = Model.RequestPagedList.PageNumber - 1 }, null)</li>
+					}
+					@if(Model.RequestPagedList.HasNextPage)
+					{
+					<li>@Html.ActionLink("Älter", "Details", "Url", new { page = Model.RequestPagedList.PageNumber + 1 }, null)</li>
+					}
+				</ul>
+			</nav>
 		</div>
 	</div>
 </div>

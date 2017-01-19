@@ -1,11 +1,11 @@
 ﻿namespace bd.machine.webApp.ViewModels.Url
 {
-	using System.Collections.Generic;
+	using PagedList;
 
 	public class UrlDetailsViewModel
 	{
 		public string Url { get; set; }
 
-		public IEnumerable<UrlRequestViewModel> Requests { get; set; }
+		public IPagedList<UrlRequestViewModel> RequestPagedList { get; set; }
 	}
 }
