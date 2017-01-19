@@ -1,0 +1,19 @@
+﻿@model bd.machine.webApp.ViewModels.RawHtml.RawHtmlIndexViewModel
+<div class="row">
+	<div class="col-md-12">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title">Index</h3>
+			</div>
+			<div class="panel-body">
+				<ul class="nav nav-tabs nav-justified">
+					<li role="presentation" class="active">@Html.ActionLink("Text", "Text", new { id = Model.Id})</li>
+					<li role="presentation"><a href="#">Profil</a></li>
+					<li role="presentation"><a href="#">Nachrichten</a></li>
+				</ul>
+				@if (Model.Text != null) {
+				@Html.Partial("_Text", Model.Text) }
+			</div>
+		</div>
+	</div>
+</div>

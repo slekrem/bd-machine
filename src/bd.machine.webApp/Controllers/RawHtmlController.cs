@@ -39,5 +39,23 @@
 				HtmlMetaTags = _rawHtmlService.GetHtmlMetaTagsFromRawHtml(rawHtmlServiceModel.RawHtml)
 			});
 		}
+
+		public ActionResult Text(int id) 
+		{
+			if (id <= 0)
+				throw new ArgumentOutOfRangeException("id");
+			return View("Index", new RawHtmlIndexViewModel() 
+			{
+				Id = id,
+				Text = GetRawHtmlTextViewModel(id)
+			});
+		}
+
+		private RawHtmlTextViewModel GetRawHtmlTextViewModel(int id)
+		{
+			if (id <= 0)
+				throw new ArgumentOutOfRangeException("id");
+			return new RawHtmlTextViewModel();
+		}
 	}
 }

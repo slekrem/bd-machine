@@ -2,7 +2,7 @@
 {
 	using System.Collections.Generic;
 	using System.ComponentModel.DataAnnotations;
-	using bd.machine.bal.Models.Htmltags;
+	using bal.Models.Htmltags;
 
 	public class RawHtmlDetailsViewModel
 	{

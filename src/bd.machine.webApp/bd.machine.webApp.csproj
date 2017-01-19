@@ -103,6 +103,8 @@
     <Compile Include="ViewModels\Url\UrlRequestViewModel.cs" />
     <Compile Include="Controllers\RawHtmlController.cs" />
     <Compile Include="ViewModels\RawHtml\RawHtmlDetailsViewModel.cs" />
+    <Compile Include="ViewModels\RawHtml\RawHtmlIndexViewModel.cs" />
+    <Compile Include="ViewModels\RawHtml\RawHtmlTextViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Web.config" />
@@ -130,6 +132,8 @@
     <Content Include="Views\Url\Details.cshtml" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Views\RawHtml\Details.cshtml" />
+    <Content Include="Views\RawHtml\Index.cshtml" />
+    <Content Include="Views\RawHtml\_Text.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\bal\bd.machine.bal.csproj">
