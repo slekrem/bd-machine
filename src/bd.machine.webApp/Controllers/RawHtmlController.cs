@@ -35,6 +35,7 @@
 				Url = _urlService.GetUriByUrlId(rawHtmlServiceModel.UrlId).ToString(),
 				RawHtml = rawHtmlServiceModel.RawHtml,
 				DownloadDateTime = rawHtmlServiceModel.DownloadDateTime.ToString(),
+				PageTitle = _rawHtmlService.GetHtmlTitleFromRawHtml(rawHtmlServiceModel.RawHtml)
 			});
 		}
 	}

@@ -7,6 +7,7 @@
 	using Interfaces;
 	using System.Linq;
 	using System.Text;
+	using HtmlAgilityPack;
 
 	public class RawHtmlService : IRawHtmlService
 	{
@@ -17,6 +18,18 @@
 			if (unitOfWork == null)
 				throw new ArgumentNullException("unitOfWork");
 			_unitOfWork = unitOfWork;
+		}
+
+		public string GetHtmlTitleFromRawHtml(string rawHtml)
+		{
+			if (string.IsNullOrWhiteSpace(rawHtml))
+				throw new ArgumentNullException("rawHtml");
+			var htmlDocument = new HtmlDocument();
+			htmlDocument.LoadHtml(rawHtml);
+			var titleNode = htmlDocument.DocumentNode.SelectSingleNode("/html/head/title");
+			if (titleNode == null)
+				return string.Empty;
+			return titleNode.InnerHtml;
 		}
 
 		public RawHtmlServiceModel GetRawHtmlRawHtmlServiceModelById(int rawHtmlId)

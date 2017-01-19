@@ -7,5 +7,7 @@
 		void SaveRawHtmlAsByteArray(byte[] rawHtml, int urlId);
 
 		RawHtmlServiceModel GetRawHtmlRawHtmlServiceModelById(int rawHtmlId);
+
+		string GetHtmlTitleFromRawHtml(string rawHtml);
 	}
 }
