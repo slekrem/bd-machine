@@ -8,5 +8,7 @@
 		IDictionary<int, Uri> GetAllUris();
 
 		int GetCrawledSitesCountByUrlId(int urlId);
+
+		int CreateNewUrl(Uri uri);
 	}
 }

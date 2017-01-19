@@ -25,5 +25,13 @@
 
 			_context = context;
 		}
+
+		public void Create(Url url)
+		{
+			if (url == null)
+				throw new ArgumentNullException("url");
+			_context.Urls.Add(url);
+			_context.SaveChanges();
+		}
 	}
 }

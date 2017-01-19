@@ -6,5 +6,7 @@
 	public interface IUrlRepository
 	{
 		IQueryable<Url> Urls { get; }
+
+		void Create(Url url);
 	}
 }
