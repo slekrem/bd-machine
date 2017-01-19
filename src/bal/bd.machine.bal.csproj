@@ -36,6 +36,7 @@
     <Compile Include="Interfaces\IRawHtmlService.cs" />
     <Compile Include="Implementations\RawHtmlService.cs" />
     <Compile Include="Implementations\Models\UrlRequest.cs" />
+    <Compile Include="Implementations\Models\RawHtmlServiceModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Interfaces\" />

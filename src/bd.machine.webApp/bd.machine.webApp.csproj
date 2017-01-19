@@ -84,6 +84,7 @@
     <Folder Include="ViewModels\" />
     <Folder Include="ViewModels\Home\" />
     <Folder Include="ViewModels\Url\" />
+    <Folder Include="ViewModels\RawHtml\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\HomeController.cs" />
@@ -97,6 +98,8 @@
     <Compile Include="ViewModels\Url\UrlAddViewModel.cs" />
     <Compile Include="ViewModels\Url\UrlDetailsViewModel.cs" />
     <Compile Include="ViewModels\Url\UrlRequestViewModel.cs" />
+    <Compile Include="Controllers\RawHtmlController.cs" />
+    <Compile Include="ViewModels\RawHtml\RawHtmlDetailsViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Web.config" />
@@ -123,6 +126,7 @@
     <Content Include="Views\Url\Add.cshtml" />
     <Content Include="Views\Url\Details.cshtml" />
     <Content Include="Content\PagedList.css" />
+    <Content Include="Views\RawHtml\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\bal\bd.machine.bal.csproj">

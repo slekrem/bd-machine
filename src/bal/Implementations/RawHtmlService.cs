@@ -1,9 +1,12 @@
 ﻿namespace bd.machine.bal.Implementations
 {
 	using System;
+	using Models;
 	using dal.Implementations.Models;
 	using dal.Interfaces;
 	using Interfaces;
+	using System.Linq;
+	using System.Text;
 
 	public class RawHtmlService : IRawHtmlService
 	{
@@ -14,6 +17,23 @@
 			if (unitOfWork == null)
 				throw new ArgumentNullException("unitOfWork");
 			_unitOfWork = unitOfWork;
+		}
+
+		public RawHtmlServiceModel GetRawHtmlRawHtmlServiceModelById(int rawHtmlId)
+		{
+			if (rawHtmlId <= 0)
+				throw new ArgumentOutOfRangeException("rawHtmlId");
+			var urlRawHtmlEntry = _unitOfWork
+				.UrlRawHtmlRepository
+				.UrlRawHtml
+				.Single(x => x.RawHtmlId == rawHtmlId);
+			return new RawHtmlServiceModel()
+			{
+				RawHtmlId = urlRawHtmlEntry.RawHtmlId,
+				UrlId = urlRawHtmlEntry.UrlId,
+				DownloadDateTime = urlRawHtmlEntry.CreationDate,
+				RawHtml = Encoding.Default.GetString(urlRawHtmlEntry.RawHtml.Value),
+			};
 		}
 
 		public void SaveRawHtmlAsByteArray(byte[] rawHtml, int urlId)
