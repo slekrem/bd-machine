@@ -87,6 +87,7 @@
     <Compile Include="Interfaces\Repositories\IRawUrlRepository.cs" />
     <Compile Include="Implementations\Repositories\RawHostRepository.cs" />
     <Compile Include="Implementations\Repositories\RawUrlRepository.cs" />
+    <Compile Include="Implementations\Entities\CrawlableUrlEntity.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
