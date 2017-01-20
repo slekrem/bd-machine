@@ -21,6 +21,7 @@
 		private IUrlRawHtmlRepository _urlRawHtmlRepository;
 		private IRawHostRepository _rawHostRepository;
 		private IRawUrlRepository _rawUrlRepository;
+		private ICrawlableUrlRepository _crawlableUrlRepository;
 		
 		public IFragmentRepository FragmentRepository 
 		{ 
@@ -139,6 +140,16 @@
 				if (_rawUrlRepository == null)
 					_rawUrlRepository = new RawUrlRepository(_context);
 				return _rawUrlRepository;
+			}
+		}
+
+		public ICrawlableUrlRepository CrawlableUrlRepository
+		{
+			get
+			{
+				if (_crawlableUrlRepository == null)
+					_crawlableUrlRepository = new CrawlableUrlRepository(_context);
+				return _crawlableUrlRepository;
 			}
 		}
 

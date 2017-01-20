@@ -27,5 +27,7 @@
 		IRawHostRepository RawHostRepository { get; }
 
 		IRawUrlRepository RawUrlRepository { get; }
+
+		ICrawlableUrlRepository CrawlableUrlRepository { get; }
 	}
 }
