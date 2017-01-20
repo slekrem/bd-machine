@@ -80,6 +80,7 @@
     <Compile Include="Implementations\Models\UrlRawHtml.cs" />
     <Compile Include="Interfaces\Repositories\IUrlRawHtmlRepository.cs" />
     <Compile Include="Implementations\Repositories\UrlRawHtmlRepository.cs" />
+    <Compile Include="Implementations\Models\RawUrl.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
