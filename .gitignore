@@ -9,5 +9,5 @@ src/crawler/obj
 bd.machine.dal.csproj.user
 src/dal/bin
 src/dal/obj
-src/bd.machine.webApp/bin
-src/bd.machine.webApp/obj
+src/webApp/bin
+src/webApp/obj
