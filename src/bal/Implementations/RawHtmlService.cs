@@ -76,7 +76,8 @@
 				throw new ArgumentOutOfRangeException("rawHtmlId");
 			var rawHtmlEntry = _unitOfWork
 				.RawHtmlRepository
-				.RawHtmls.Single(x => x.Id == rawHtmlId);
+				.RawHtmls
+				.Single(x => x.Id == rawHtmlId);
 			var rawHtml = Encoding.Default.GetString(rawHtmlEntry.Value);
 
 			var htmlDocument = new HtmlDocument();
