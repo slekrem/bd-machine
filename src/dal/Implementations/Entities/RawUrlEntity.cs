@@ -15,5 +15,8 @@
 		public DateTime Timestamp { get; set; }
 
 		public string Data { get; set; }
+
+		[ForeignKey("RawHostId")]
+		public virtual RawHostEntity RawHost { get; set; }
 	}
 }
