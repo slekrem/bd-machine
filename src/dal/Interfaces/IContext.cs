@@ -31,6 +31,8 @@
 
 		DbSet<RawUrlEntity> RawUrls { get; set; }
 
+		DbSet<CrawlableUrlEntity> CrawlableUrls { get; set; }
+
 		int SaveChanges();
 	}
 }

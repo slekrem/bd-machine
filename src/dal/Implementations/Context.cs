@@ -31,6 +31,8 @@
 
 		public DbSet<RawUrlEntity> RawUrls { get; set; }
 
+		public DbSet<CrawlableUrlEntity> CrawlableUrls { get; set; }
+
 		public Context(string connectionString)
 			: base(connectionString) { }
 	}
