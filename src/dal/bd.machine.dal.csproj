@@ -81,6 +81,12 @@
     <Compile Include="Interfaces\Repositories\IUrlRawHtmlRepository.cs" />
     <Compile Include="Implementations\Repositories\UrlRawHtmlRepository.cs" />
     <Compile Include="Implementations\Models\RawUrl.cs" />
+    <Compile Include="Implementations\Entities\RawHostEntity.cs" />
+    <Compile Include="Implementations\Entities\RawUrlEntity.cs" />
+    <Compile Include="Interfaces\Repositories\IRawHostRepository.cs" />
+    <Compile Include="Interfaces\Repositories\IRawUrlRepository.cs" />
+    <Compile Include="Implementations\Repositories\RawHostRepository.cs" />
+    <Compile Include="Implementations\Repositories\RawUrlRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -92,6 +98,7 @@
     <Folder Include="Interfaces\Repositories\" />
     <Folder Include="Implementations\Repositories\" />
     <Folder Include="Implementations\Repositories\" />
+    <Folder Include="Implementations\Entities\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

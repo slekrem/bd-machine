@@ -42,6 +42,8 @@
     <Compile Include="Implementations\Models\UrlRequest.cs" />
     <Compile Include="Implementations\Models\RawHtmlServiceModel.cs" />
     <Compile Include="Implementations\Models\HtmlTags\HtmlMetaTag.cs" />
+    <Compile Include="Interfaces\ICrawlerService.cs" />
+    <Compile Include="Implementations\CrawlerService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Interfaces\" />

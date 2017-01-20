@@ -23,5 +23,9 @@
 		IUrlRepository UrlRepository { get; }
 
 		IUrlRawHtmlRepository UrlRawHtmlRepository { get; }
+
+		IRawHostRepository RawHostRepository { get; }
+
+		IRawUrlRepository RawUrlRepository { get; }
 	}
 }

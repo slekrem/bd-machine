@@ -19,6 +19,8 @@
 		private IUrlMetadataRepository _urlMetadataRepository;
 		private IUrlRepository _urlRepository;
 		private IUrlRawHtmlRepository _urlRawHtmlRepository;
+		private IRawHostRepository _rawHostRepository;
+		private IRawUrlRepository _rawUrlRepository;
 		
 		public IFragmentRepository FragmentRepository 
 		{ 
@@ -117,6 +119,26 @@
 				if (_urlRawHtmlRepository == null)
 					_urlRawHtmlRepository = new UrlRawHtmlRepository(_context);
 				return _urlRawHtmlRepository;
+			}
+		}
+
+		public IRawHostRepository RawHostRepository
+		{
+			get
+			{
+				if (_rawHostRepository == null)
+					_rawHostRepository = new RawHostRepository(_context);
+				return _rawHostRepository;
+			}
+		}
+
+		public IRawUrlRepository RawUrlRepository
+		{
+			get
+			{
+				if (_rawUrlRepository == null)
+					_rawUrlRepository = new RawUrlRepository(_context);
+				return _rawUrlRepository;
 			}
 		}
 

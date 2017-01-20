@@ -3,6 +3,7 @@
 	using System.Data.Entity;
 	using Models;
 	using Interfaces;
+	using Entities;
 
 	public class Context : DbContext, IContext
 	{
@@ -25,6 +26,10 @@
 		public DbSet<RawHtml> RawHtmls { get; set; }
 
 		public DbSet<UrlRawHtml> UrlRawHtml { get; set; }
+
+		public DbSet<RawHostEntity> RawHosts { get; set; }
+
+		public DbSet<RawUrlEntity> RawUrls { get; set; }
 
 		public Context(string connectionString)
 			: base(connectionString) { }
