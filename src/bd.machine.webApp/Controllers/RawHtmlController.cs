@@ -51,11 +51,35 @@
 			});
 		}
 
-		private RawHtmlTextViewModel GetRawHtmlTextViewModel(int id)
+		public ActionResult Urls(int id)
 		{
 			if (id <= 0)
 				throw new ArgumentOutOfRangeException("id");
-			return new RawHtmlTextViewModel();
+			return View("Index", new RawHtmlIndexViewModel()
+			{
+				Id = id,
+				Urls = GetRawHtmlUrlsViewModel(id)
+			});
+		}
+
+		private RawHtmlUrlsViewModel GetRawHtmlUrlsViewModel(int rawHtmlId)
+		{
+			if (rawHtmlId <= 0)
+				throw new ArgumentOutOfRangeException("rawHtmlId");
+			return new RawHtmlUrlsViewModel()
+			{
+				Urls = _rawHtmlService.GetUrlsFromRawHtmlById(rawHtmlId)
+			};
+		}
+
+		private RawHtmlTextViewModel GetRawHtmlTextViewModel(int rawHtmlId)
+		{
+			if (rawHtmlId <= 0)
+				throw new ArgumentOutOfRangeException("rawHtmlId");
+			return new RawHtmlTextViewModel()
+			{
+				Text = _rawHtmlService.GetHtmlTextByRawHtmlId(rawHtmlId)
+			};
 		}
 	}
 }

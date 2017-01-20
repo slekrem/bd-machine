@@ -2,8 +2,8 @@
 {
 	using System.Collections.Generic;
 
-	public class RawHtmlTextViewModel
+	public class RawHtmlUrlsViewModel
 	{
-		public IEnumerable<string> Text { get; set; }
+		public IEnumerable<string> Urls { get; set; }
 	}
 }

@@ -39,6 +39,64 @@
 				});
 		}
 
+		public IEnumerable<string> GetHtmlTextByRawHtmlId(int rawHtmlId)
+		{
+			if (rawHtmlId <= 0)
+				throw new ArgumentOutOfRangeException("rawHtmlId");
+			var rawHtmlEntry = _unitOfWork
+				.RawHtmlRepository
+				.RawHtmls.Single(x => x.Id == rawHtmlId);
+			var rawHtml = Encoding.Default.GetString(rawHtmlEntry.Value);
+
+			var htmlDocument = new HtmlDocument();
+			htmlDocument.LoadHtml(rawHtml);
+
+			var asd = new List<string>();
+			foreach (var node in htmlDocument.DocumentNode.SelectNodes("//text()"))
+			{
+				if (!string.IsNullOrWhiteSpace(node.InnerText))
+				{
+					var parentNodeName = node.ParentNode.Name.ToLower();
+					if (parentNodeName != "script" &&
+					    parentNodeName != "a" &&
+					    parentNodeName != "title" &&
+					    parentNodeName != "header")
+					{
+						asd.Add(node.InnerText);
+					}
+				}
+			}
+
+			return asd;
+		}
+
+		public IEnumerable<string> GetUrlsFromRawHtmlById(int rawHtmlId)
+		{
+			if (rawHtmlId <= 0)
+				throw new ArgumentOutOfRangeException("rawHtmlId");
+			var rawHtmlEntry = _unitOfWork
+				.RawHtmlRepository
+				.RawHtmls.Single(x => x.Id == rawHtmlId);
+			var rawHtml = Encoding.Default.GetString(rawHtmlEntry.Value);
+
+			var htmlDocument = new HtmlDocument();
+			htmlDocument.LoadHtml(rawHtml);
+			var asd = new List<string>();
+			foreach (var node in htmlDocument.DocumentNode.SelectNodes("//a[@href]"))
+			{
+				// Get the value of the HREF attribute
+				string hrefValue = node.GetAttributeValue("href", string.Empty);
+
+				Uri uri = null;
+				if (Uri.TryCreate(hrefValue, UriKind.Absolute, out uri)) 
+				{
+					if(!string.IsNullOrWhiteSpace(uri.Host))
+						asd.Add(uri.OriginalString);
+				}
+			}
+			return asd;
+		}
+
 		public string GetHtmlTitleFromRawHtml(string rawHtml)
 		{
 			if (string.IsNullOrWhiteSpace(rawHtml))

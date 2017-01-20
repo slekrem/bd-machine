@@ -4,10 +4,19 @@
 	using Models;
 	using Interfaces;
 	using Interfaces.Repositories;
+	using System.Linq;
 
 	public class RawHtmlRepository : IRawHtmlRepository
 	{
 		private readonly IContext _context;
+
+		public IQueryable<RawHtml> RawHtmls
+		{
+			get
+			{
+				return _context.RawHtmls;
+			}
+		}
 		
 		public RawHtmlRepository(IContext context)
 		{

@@ -13,5 +13,9 @@
 		string GetHtmlTitleFromRawHtml(string rawHtml);
 
 		IEnumerable<HtmlMetaTag> GetHtmlMetaTagsFromRawHtml(string rawHtml);
+
+		IEnumerable<string> GetHtmlTextByRawHtmlId(int rawHtmlId);
+
+		IEnumerable<string> GetUrlsFromRawHtmlById(int rawHtmlId);
 	}
 }

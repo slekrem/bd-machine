@@ -7,12 +7,11 @@
 			</div>
 			<div class="panel-body">
 				<ul class="nav nav-tabs nav-justified">
-					<li role="presentation" class="active">@Html.ActionLink("Text", "Text", new { id = Model.Id})</li>
-					<li role="presentation"><a href="#">Profil</a></li>
-					<li role="presentation"><a href="#">Nachrichten</a></li>
+					<li role="presentation" @if (Model.Text != null) { @Html.Raw(@"class=""active""") } > @Html.ActionLink("Text", "Text", new { id = Model.Id})</li>
+					<li role="presentation" @if (Model.Urls != null) { @Html.Raw(@"class=""active""") } > @Html.ActionLink("URLs", "URLs", new { id = Model.Id})</li>
 				</ul>
-				@if (Model.Text != null) {
-				@Html.Partial("_Text", Model.Text) }
+				@if (Model.Text != null) { @Html.Partial("_Text", Model.Text) }
+				@if (Model.Urls != null) { @Html.Partial("_Urls", Model.Urls) }
 			</div>
 		</div>
 	</div>
