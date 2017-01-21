@@ -13,5 +13,5 @@ RUN wget https://github.com/stefanmerkel/bd-machine/releases/download/0.1/packag
 RUN unzip packages.zip
 RUN xbuild bd.machine.sln
 
-WORKDIR /root/bd-machine/src/bd.machine.webApp
-ENTRYPOINT xsp4
+WORKDIR /root/bd-machine/src/webApp
+ENTRYPOINT xsp4 --nonstop

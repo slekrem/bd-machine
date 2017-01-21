@@ -2,7 +2,7 @@
 {
 	using System;
 	using System.Linq;
-	using bd.machine.dal.Implementations.Entities;
+	using dal.Implementations.Entities;
 	using dal.Interfaces;
 	using Interfaces;
 
