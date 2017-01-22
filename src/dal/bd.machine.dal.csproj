@@ -90,6 +90,7 @@
     <Compile Include="Implementations\Entities\CrawlableUrlEntity.cs" />
     <Compile Include="Interfaces\Repositories\ICrawlableUrlRepository.cs" />
     <Compile Include="Implementations\Repositories\CrawlableUrlRepository.cs" />
+    <Compile Include="Implementations\Entities\RawHtmlEntity.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
