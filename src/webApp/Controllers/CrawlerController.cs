@@ -24,7 +24,10 @@
 		[HttpGet]
 		public ActionResult Index()
 		{
-			return View();
+			return View(new CrawlerIndexViewModel() 
+			{
+				CrawlableUrls = _crawlerService.GetCrawlableUrls()
+			});
 		}
 
 		[HttpGet]
@@ -44,14 +47,15 @@
 			Uri uri = null;
 			if (!Uri.TryCreate(viewModel.Url, UriKind.Absolute, out uri))
 				return View(viewModel);
-			return RedirectToAction("Url", new { id = _crawlerService.AddUrl(uri) });
+			return RedirectToAction("CrawlableUrl", new { id = _crawlerService.AddCrawlableUrl(uri) });
 		}
 
 		[HttpGet]
-		public ActionResult Url(int id) 
+		public ActionResult CrawlableUrl(int id) 
 		{
 			if (id <= 0)
 				throw new ArgumentOutOfRangeException("id");
+			
 			return View();
 		}
 	}
