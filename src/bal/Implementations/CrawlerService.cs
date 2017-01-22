@@ -53,7 +53,8 @@
 			{
 				Id = x.Id,
 				IsActivated = x.IsActivated,
-				RawUrl = x.RawUrl.Data
+				RawUrl = x.RawUrl.Data,
+				RawUrlId = x.RawUrlId
 			});
 		}
 

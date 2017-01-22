@@ -10,6 +10,7 @@
 	using HtmlAgilityPack;
 	using bal.Models.Htmltags;
 	using System.Collections.Generic;
+	using bd.machine.dal.Implementations.Entities;
 
 	public class RawHtmlService : IRawHtmlService
 	{
@@ -46,7 +47,7 @@
 			var rawHtmlEntry = _unitOfWork
 				.RawHtmlRepository
 				.RawHtmls.Single(x => x.Id == rawHtmlId);
-			var rawHtml = Encoding.Default.GetString(rawHtmlEntry.Value);
+			var rawHtml = Encoding.Default.GetString(rawHtmlEntry.Data);
 
 			var htmlDocument = new HtmlDocument();
 			htmlDocument.LoadHtml(rawHtml);
@@ -78,7 +79,7 @@
 				.RawHtmlRepository
 				.RawHtmls
 				.Single(x => x.Id == rawHtmlId);
-			var rawHtml = Encoding.Default.GetString(rawHtmlEntry.Value);
+			var rawHtml = Encoding.Default.GetString(rawHtmlEntry.Data);
 
 			var htmlDocument = new HtmlDocument();
 			htmlDocument.LoadHtml(rawHtml);
@@ -127,22 +128,20 @@
 			};
 		}
 
-		public void SaveRawHtmlAsByteArray(byte[] rawHtml, int urlId)
+		public void SaveRawHtmlAsByteArray(byte[] rawHtml, int rawUrlId)
 		{
 			if (rawHtml == null)
 				throw new ArgumentNullException("rawHtml");
-			if (urlId <= 0)
-				throw new ArgumentOutOfRangeException("urlId");
-
-			var rawHtmlEntry = new RawHtml();
-			rawHtmlEntry.Value = rawHtml;
-			_unitOfWork.RawHtmlRepository.Create(rawHtmlEntry);
-			_unitOfWork.UrlRawHtmlRepository.Create(new UrlRawHtml() 
-			{
-				UrlId = urlId,
-				RawHtmlId = rawHtmlEntry.Id,
-				CreationDate = DateTime.Now
-			});
+			if (rawUrlId <= 0)
+				throw new ArgumentOutOfRangeException("rawUrlId");
+			_unitOfWork
+				.RawHtmlRepository
+				.Create(new RawHtmlEntity()
+				{
+					RawUrlId = rawUrlId,
+					Data = rawHtml,
+					Timestamp = DateTime.UtcNow
+				});
 		}
 	}
 }

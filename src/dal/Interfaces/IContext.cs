@@ -23,7 +23,7 @@
 
 		DbSet<UrlMetadata> UrlMetadatas { get; set; }
 
-		DbSet<RawHtml> RawHtmls { get; set; }
+		DbSet<RawHtmlEntity> RawHtmls { get; set; }
 
 		DbSet<UrlRawHtml> UrlRawHtml { get; set; }
 

@@ -7,5 +7,7 @@
 		public bool IsActivated { get; set; }
 
 		public string RawUrl { get; set; }
+
+		public int RawUrlId { get; set; }
 	}
 }

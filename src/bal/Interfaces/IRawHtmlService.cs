@@ -6,7 +6,7 @@
 
 	public interface IRawHtmlService
 	{
-		void SaveRawHtmlAsByteArray(byte[] rawHtml, int urlId);
+		void SaveRawHtmlAsByteArray(byte[] rawHtml, int rawUrlId);
 
 		RawHtmlServiceModel GetRawHtmlRawHtmlServiceModelById(int rawHtmlId);
 

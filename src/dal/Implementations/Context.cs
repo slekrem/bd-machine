@@ -23,7 +23,7 @@
 
 		public DbSet<Url> Urls { get; set; }
 
-		public DbSet<RawHtml> RawHtmls { get; set; }
+		public DbSet<RawHtmlEntity> RawHtmls { get; set; }
 
 		public DbSet<UrlRawHtml> UrlRawHtml { get; set; }
 

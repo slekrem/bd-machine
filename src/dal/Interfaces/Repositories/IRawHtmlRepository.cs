@@ -1,12 +1,12 @@
 ﻿namespace bd.machine.dal.Interfaces.Repositories
 {
 	using System.Linq;
-	using Implementations.Models;
+	using Implementations.Entities;
 
 	public interface IRawHtmlRepository
 	{
-		IQueryable<RawHtml> RawHtmls { get; }
+		IQueryable<RawHtmlEntity> RawHtmls { get; }
 		
-		void Create(RawHtml rawHtml);
+		void Create(RawHtmlEntity rawHtml);
 	}
 }
