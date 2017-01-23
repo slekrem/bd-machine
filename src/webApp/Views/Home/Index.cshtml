@@ -4,29 +4,6 @@
 	<div class="col-md-12">
 		<div class="panel panel-default">
 			<div class="panel-heading">Urls</div>
-			<table class="table">
-				<caption>Optionale Tabellen-Beschriftung.</caption>
-				<thead>
-					<tr>
-						<th>Id</th>
-						<th>Url</th>
-						<th>Sites</th>
-						<th>Letzte Abfrage</th>
-						<th>Aktionen</th>
-					</tr>
-				</thead>
-				<tbody>
-					@foreach(var url in Model.Urls) {
-					<tr>
-						<td>@url.Id</td>
-						<td>@url.Url</td>
-						<td>@url.SitesCount</td>
-						<td>@url.LastRequest</td>
-						<!-- <td>Html.ActionLink("Details","Details", "Url", new { id = url.Id }, new { class="btn btn-default", role="button" })</td> -->
-					</tr>
-					}
-				</tbody>
-			</table>
 			<div class="panel-footer">
 				<!-- Html.ActionLink("Add", "Add", "Url", null, new { class="btn btn-default", role="button" }) -->
 			</div>
