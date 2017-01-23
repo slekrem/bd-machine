@@ -18,7 +18,6 @@
 		{
 			if (context == null)
 				throw new ArgumentNullException("context");
-			_urlService = new UrlService(new UnitOfWork(context));
 		}
 
 		public UrlController() : this(new Context("name=MySql")) { }

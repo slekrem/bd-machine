@@ -55,7 +55,6 @@
     <Compile Include="Implementations\Models\Query.cs" />
     <Compile Include="Implementations\Models\Scheme.cs" />
     <Compile Include="Implementations\Models\UrlMetadata.cs" />
-    <Compile Include="Implementations\Models\Url.cs" />
     <Compile Include="Interfaces\IUnitOfWork.cs" />
     <Compile Include="Interfaces\Repositories\IFragmentRepository.cs" />
     <Compile Include="Interfaces\Repositories\IHostRepository.cs" />
@@ -63,7 +62,6 @@
     <Compile Include="Interfaces\Repositories\IPortRepository.cs" />
     <Compile Include="Interfaces\Repositories\IQueryRepository.cs" />
     <Compile Include="Interfaces\Repositories\ISchemeRepository.cs" />
-    <Compile Include="Interfaces\Repositories\IUrlRepository.cs" />
     <Compile Include="Interfaces\Repositories\IUrlMetadataRepository.cs" />
     <Compile Include="Implementations\Repositories\FragmentRepository.cs" />
     <Compile Include="Implementations\Repositories\HostRepository.cs" />
@@ -72,14 +70,10 @@
     <Compile Include="Implementations\Repositories\QueryRepository.cs" />
     <Compile Include="Implementations\Repositories\SchemeRepository.cs" />
     <Compile Include="Implementations\Repositories\UrlMetadataRepository.cs" />
-    <Compile Include="Implementations\Repositories\UrlRepository.cs" />
     <Compile Include="Implementations\UnitOfWork.cs" />
     <Compile Include="Implementations\Models\RawHtml.cs" />
     <Compile Include="Interfaces\Repositories\IRawHtmlRepository.cs" />
     <Compile Include="Implementations\Repositories\RawHtmlRepository.cs" />
-    <Compile Include="Implementations\Models\UrlRawHtml.cs" />
-    <Compile Include="Interfaces\Repositories\IUrlRawHtmlRepository.cs" />
-    <Compile Include="Implementations\Repositories\UrlRawHtmlRepository.cs" />
     <Compile Include="Implementations\Models\RawUrl.cs" />
     <Compile Include="Implementations\Entities\RawHostEntity.cs" />
     <Compile Include="Implementations\Entities\RawUrlEntity.cs" />

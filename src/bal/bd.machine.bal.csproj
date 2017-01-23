@@ -36,7 +36,6 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Interfaces\IUrlService.cs" />
-    <Compile Include="Implementations\UrlService.cs" />
     <Compile Include="Interfaces\IRawHtmlService.cs" />
     <Compile Include="Implementations\RawHtmlService.cs" />
     <Compile Include="Implementations\Models\UrlRequest.cs" />

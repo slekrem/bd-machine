@@ -7,7 +7,7 @@
 			</div>
 			<div class="panel-body">
 				<ul class="nav nav-tabs nav-justified">
-					<li role="presentation" @if (Model.Text != null) { @Html.Raw(@"class=""active""") } > @Html.ActionLink("Text", "Text", new { id = Model.Id})</li>
+					<li role="presentation" @if (Model.Text != null) { @Html.Raw(@"class=""active""") } > <a href="/RawHtml/Text/">Text</a> @Html.ActionLink("Text", "Text", new { id = Model.Id})</li>
 					<li role="presentation" @if (Model.Urls != null) { @Html.Raw(@"class=""active""") } > @Html.ActionLink("URLs", "URLs", new { id = Model.Id})</li>
 				</ul>
 				@if (Model.Text != null) { @Html.Partial("_Text", Model.Text) }

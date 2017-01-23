@@ -17,8 +17,6 @@
 		private IQueryRepository _queryRepository;
 		private ISchemeRepository _schemeRepository;
 		private IUrlMetadataRepository _urlMetadataRepository;
-		private IUrlRepository _urlRepository;
-		private IUrlRawHtmlRepository _urlRawHtmlRepository;
 		private IRawHostRepository _rawHostRepository;
 		private IRawUrlRepository _rawUrlRepository;
 		private ICrawlableUrlRepository _crawlableUrlRepository;
@@ -100,26 +98,6 @@
 				if (_urlMetadataRepository == null)
 					_urlMetadataRepository = new UrlMetadataRepository(_context);
 				return _urlMetadataRepository;
-			}
-		}
-
-		public IUrlRepository UrlRepository 
-		{ 
-			get 
-			{
-				if (_urlRepository == null)
-					_urlRepository = new UrlRepository(_context);
-				return _urlRepository;
-			}
-		}
-
-		public IUrlRawHtmlRepository UrlRawHtmlRepository 
-		{
-			get 
-			{
-				if (_urlRawHtmlRepository == null)
-					_urlRawHtmlRepository = new UrlRawHtmlRepository(_context);
-				return _urlRawHtmlRepository;
 			}
 		}
 

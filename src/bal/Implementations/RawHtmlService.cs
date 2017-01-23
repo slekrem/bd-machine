@@ -111,23 +111,6 @@
 			return titleNode.InnerHtml;
 		}
 
-		public RawHtmlServiceModel GetRawHtmlRawHtmlServiceModelById(int rawHtmlId)
-		{
-			if (rawHtmlId <= 0)
-				throw new ArgumentOutOfRangeException("rawHtmlId");
-			var urlRawHtmlEntry = _unitOfWork
-				.UrlRawHtmlRepository
-				.UrlRawHtml
-				.Single(x => x.RawHtmlId == rawHtmlId);
-			return new RawHtmlServiceModel()
-			{
-				RawHtmlId = urlRawHtmlEntry.RawHtmlId,
-				UrlId = urlRawHtmlEntry.UrlId,
-				DownloadDateTime = urlRawHtmlEntry.CreationDate,
-				RawHtml = Encoding.Default.GetString(urlRawHtmlEntry.RawHtml.Value),
-			};
-		}
-
 		public void SaveRawHtmlAsByteArray(byte[] rawHtml, int rawUrlId)
 		{
 			if (rawHtml == null)

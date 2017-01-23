@@ -19,13 +19,9 @@
 
 		DbSet<Fragment> Fragments { get; set; }
 
-		DbSet<Url> Urls { get; set; }
-
 		DbSet<UrlMetadata> UrlMetadatas { get; set; }
 
 		DbSet<RawHtmlEntity> RawHtmls { get; set; }
-
-		DbSet<UrlRawHtml> UrlRawHtml { get; set; }
 
 		DbSet<RawHostEntity> RawHosts { get; set; }
 

@@ -21,11 +21,7 @@
 
 		public DbSet<UrlMetadata> UrlMetadatas { get; set; }
 
-		public DbSet<Url> Urls { get; set; }
-
 		public DbSet<RawHtmlEntity> RawHtmls { get; set; }
-
-		public DbSet<UrlRawHtml> UrlRawHtml { get; set; }
 
 		public DbSet<RawHostEntity> RawHosts { get; set; }
 

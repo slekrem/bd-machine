@@ -8,8 +8,6 @@
 	{
 		void SaveRawHtmlAsByteArray(byte[] rawHtml, int rawUrlId);
 
-		RawHtmlServiceModel GetRawHtmlRawHtmlServiceModelById(int rawHtmlId);
-
 		string GetHtmlTitleFromRawHtml(string rawHtml);
 
 		IEnumerable<HtmlMetaTag> GetHtmlMetaTagsFromRawHtml(string rawHtml);
