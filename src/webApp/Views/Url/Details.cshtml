@@ -1,0 +1,46 @@
+﻿@model bd.machine.webApp.ViewModels.Url.UrlDetailsViewModel
+<div class="row">
+	<div class="col-md-12">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title">@Model.Url</h3>
+			</div>
+			<div class="panel-body">
+				Panel-Inhalt
+			</div>
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Id</th>
+						<th>Abfragezeit</th>
+						<th>Größe</th>
+						<th>Aktionen</th>
+					</tr>
+				</thead>
+				<tbody>
+					@foreach(var url in Model.RequestPagedList)
+					{
+					<tr>
+						<td>@url.Id</td>
+						<td>@url.LastRequest</td>
+						<td>@url.TrafficInKilobyte</td>
+						<td>@Html.ActionLink("Details","Details", "RawHtml", new { id = url.RawHtmlId }, new { @class="btn btn-default", role="button" })</td>
+					</tr>
+					}
+				</tbody>
+			</table>
+			<nav>
+				<ul class="pager">
+					@if(Model.RequestPagedList.HasPreviousPage)
+					{
+					<li>@Html.ActionLink("Neuer", "Details", "Url", new { page = Model.RequestPagedList.PageNumber - 1 }, null)</li>
+					}
+					@if(Model.RequestPagedList.HasNextPage)
+					{
+					<li>@Html.ActionLink("Älter", "Details", "Url", new { page = Model.RequestPagedList.PageNumber + 1 }, null)</li>
+					}
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>

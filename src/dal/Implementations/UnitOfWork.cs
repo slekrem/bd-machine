@@ -17,8 +17,9 @@
 		private IQueryRepository _queryRepository;
 		private ISchemeRepository _schemeRepository;
 		private IUrlMetadataRepository _urlMetadataRepository;
-		private IUrlRepository _urlRepository;
-		private IUrlRawHtmlRepository _urlRawHtmlRepository;
+		private IRawHostRepository _rawHostRepository;
+		private IRawUrlRepository _rawUrlRepository;
+		private ICrawlableUrlRepository _crawlableUrlRepository;
 		
 		public IFragmentRepository FragmentRepository 
 		{ 
@@ -100,23 +101,33 @@
 			}
 		}
 
-		public IUrlRepository UrlRepository 
-		{ 
-			get 
+		public IRawHostRepository RawHostRepository
+		{
+			get
 			{
-				if (_urlRepository == null)
-					_urlRepository = new UrlRepository(_context);
-				return _urlRepository;
+				if (_rawHostRepository == null)
+					_rawHostRepository = new RawHostRepository(_context);
+				return _rawHostRepository;
 			}
 		}
 
-		public IUrlRawHtmlRepository UrlRawHtmlRepository 
+		public IRawUrlRepository RawUrlRepository
 		{
-			get 
+			get
 			{
-				if (_urlRawHtmlRepository == null)
-					_urlRawHtmlRepository = new UrlRawHtmlRepository(_context);
-				return _urlRawHtmlRepository;
+				if (_rawUrlRepository == null)
+					_rawUrlRepository = new RawUrlRepository(_context);
+				return _rawUrlRepository;
+			}
+		}
+
+		public ICrawlableUrlRepository CrawlableUrlRepository
+		{
+			get
+			{
+				if (_crawlableUrlRepository == null)
+					_crawlableUrlRepository = new CrawlableUrlRepository(_context);
+				return _crawlableUrlRepository;
 			}
 		}
 

@@ -20,8 +20,10 @@
 
 		IUrlMetadataRepository UrlMetadataRepository { get; }
 
-		IUrlRepository UrlRepository { get; }
+		IRawHostRepository RawHostRepository { get; }
 
-		IUrlRawHtmlRepository UrlRawHtmlRepository { get; }
+		IRawUrlRepository RawUrlRepository { get; }
+
+		ICrawlableUrlRepository CrawlableUrlRepository { get; }
 	}
 }
