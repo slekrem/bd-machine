@@ -97,7 +97,6 @@
     </Compile>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="ViewModels\Home\HomeIndexViewModel.cs" />
-    <Compile Include="ViewModels\Home\HomeIndexUrlViewModel.cs" />
     <Compile Include="Controllers\UrlController.cs" />
     <Compile Include="ViewModels\Url\UrlAddViewModel.cs" />
     <Compile Include="ViewModels\Url\UrlDetailsViewModel.cs" />
@@ -110,6 +109,7 @@
     <Compile Include="Controllers\CrawlerController.cs" />
     <Compile Include="ViewModels\Crawler\CrawlerAddUrlViewModel.cs" />
     <Compile Include="ViewModels\Crawler\CrawlerIndexViewModel.cs" />
+    <Compile Include="ViewModels\Home\HomeIndexHostViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Web.config" />
