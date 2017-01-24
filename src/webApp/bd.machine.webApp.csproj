@@ -110,6 +110,7 @@
     <Compile Include="ViewModels\Crawler\CrawlerAddUrlViewModel.cs" />
     <Compile Include="ViewModels\Crawler\CrawlerIndexViewModel.cs" />
     <Compile Include="ViewModels\Home\HomeIndexHostViewModel.cs" />
+    <Compile Include="Controllers\HostController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Web.config" />
@@ -143,6 +144,7 @@
     <Content Include="Views\Crawler\Index.cshtml" />
     <Content Include="Views\Crawler\AddUrl.cshtml" />
     <Content Include="Views\Crawler\CrawlableUrl.cshtml" />
+    <Content Include="Views\Host\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\bal\bd.machine.bal.csproj">

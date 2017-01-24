@@ -19,7 +19,9 @@
 					@foreach(var host in Model.Hosts) {
 					<tr>
 						<td>@host.Id</td>
-						<td>@host.Host</td>
+						<td>
+							<a href="/Host/@host.Id">@host.Host</a>
+						</td>
 						<td>@host.Urls</td>
 						<td>@host.Sites</td>
 					</tr>
