@@ -2,6 +2,7 @@
 {
 	using System;
 	using System.Data.Entity;
+	using Implementations.Entities;
 	using Implementations.Models;
 
 	public interface IContext : IDisposable
@@ -18,13 +19,15 @@
 
 		DbSet<Fragment> Fragments { get; set; }
 
-		DbSet<Url> Urls { get; set; }
-
 		DbSet<UrlMetadata> UrlMetadatas { get; set; }
 
-		DbSet<RawHtml> RawHtmls { get; set; }
+		DbSet<RawHtmlEntity> RawHtmls { get; set; }
 
-		DbSet<UrlRawHtml> UrlRawHtml { get; set; }
+		DbSet<RawHostEntity> RawHosts { get; set; }
+
+		DbSet<RawUrlEntity> RawUrls { get; set; }
+
+		DbSet<CrawlableUrlEntity> CrawlableUrls { get; set; }
 
 		int SaveChanges();
 	}

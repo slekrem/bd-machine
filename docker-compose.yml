@@ -29,6 +29,34 @@ services:
     links:
       - torproxy
       - mysql
+  webapp:
+    container_name: webapp
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile-webapp
+    links:
+      - mysql
+    ports:
+      - "9000:9000"
+  localtunnel:
+    container_name: localtunel
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile-localtunnel
+    links:
+      - webapp
+    command:
+      lt --local-host webapp --port 9000 --subdomain asd01
+  #anaconda:
+    #container_name: anaconda
+    #restart: always
+    #build:
+      #context: .
+      #dockerfile: Dockerfile-anaconda
+    #ports:
+      #- "8888:8888"
+    #command: /opt/conda/bin/conda install jupyter -y --quiet && mkdir /opt/notebooks && /opt/conda/bin/jupyter notebook --notebook-dir=/opt/notebooks --ip='*' --port=8888 --no-browser
 volumes:
     mysql_data:
-

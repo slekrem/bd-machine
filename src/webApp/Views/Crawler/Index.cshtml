@@ -1,0 +1,46 @@
+﻿@model bd.machine.webApp.ViewModels.Crawler.CrawlerIndexViewModel
+<div class="row">
+	<div class="col-md-12">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title">Crawler</h3>
+			</div>
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Id</th>
+						<th>Aktiviert</th>
+						<th>Url</th>
+						<th>Aktionen</th>
+					</tr>
+				</thead>
+				<tbody>
+					@foreach(var url in Model.CrawlableUrls) {
+					<tr>
+						<td>@url.Id</td>
+						<td>@url.IsActivated</td>
+						<td>@url.RawUrl</td>
+						<td>
+							<div class="btn-group">
+								<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									Aktion <span class="caret"></span>
+								</button>
+								<ul class="dropdown-menu">
+									<li><a href="#">Aktion</a></li>
+									<li><a href="#">Andere Aktion</a></li>
+									<li><a href="#">Irgendwas anderes</a></li>
+									<li role="separator" class="divider"></li>
+									<li><a href="#">Abgetrennter Link</a></li>
+								</ul>
+							</div>
+						</td>
+					</tr>
+					}
+				</tbody>
+			</table>
+			<div class="panel-footer">
+				<a href="/Crawler/AddUrl" class="btn btn-default" role="button">URL hinzufügen</a>
+			</div>
+		</div>
+	</div>
+</div>

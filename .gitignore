@@ -9,3 +9,5 @@ src/crawler/obj
 bd.machine.dal.csproj.user
 src/dal/bin
 src/dal/obj
+src/webApp/bin
+src/webApp/obj

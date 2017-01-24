@@ -5,8 +5,8 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProjectGuid>{92D3609E-04D6-49C6-B885-0ABA2AB7579A}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>db.machine.crawler</RootNamespace>
-    <AssemblyName>db.machine.crawler</AssemblyName>
+    <RootNamespace>bd.machine.crawler</RootNamespace>
+    <AssemblyName>bd.machine.crawler</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">

@@ -1,0 +1,33 @@
+﻿@model bd.machine.webApp.ViewModels.Home.HomeIndexViewModel
+
+<div class="row">
+	<div class="col-md-12">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title">Übersicht</h3>
+			</div>
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Id</th>
+						<th>Host</th>
+						<th>Urls</th>
+						<th>Seiten</th>
+					</tr>
+				</thead>
+				<tbody>
+					@foreach(var host in Model.Hosts) {
+					<tr>
+						<td>@host.Id</td>
+						<td>
+							<a href="/Host/@host.Id">@host.Host</a>
+						</td>
+						<td>@host.Urls</td>
+						<td>@host.Sites</td>
+					</tr>
+					}
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>

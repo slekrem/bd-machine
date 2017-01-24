@@ -1,13 +1,22 @@
 ﻿namespace bd.machine.dal.Implementations.Repositories
 {
 	using System;
-	using Models;
 	using Interfaces;
 	using Interfaces.Repositories;
+	using System.Linq;
+	using Entities;
 
 	public class RawHtmlRepository : IRawHtmlRepository
 	{
 		private readonly IContext _context;
+
+		public IQueryable<RawHtmlEntity> RawHtmls
+		{
+			get
+			{
+				return _context.RawHtmls;
+			}
+		}
 		
 		public RawHtmlRepository(IContext context)
 		{
@@ -16,7 +25,7 @@
 			_context = context;
 		}
 
-		public void Create(RawHtml rawHtml)
+		public void Create(RawHtmlEntity rawHtml)
 		{
 			if (rawHtml == null)
 				throw new ArgumentNullException("rawHtml");

@@ -1,12 +1,13 @@
-﻿namespace db.machine.crawler
+﻿namespace bd.machine.crawler
 {
 	using System;
+	using System.Linq;
 	using System.Net;
 	using System.Net.Http;
 	using System.Threading;
 	using System.Threading.Tasks;
-	using bd.machine.bal.Implementations;
-	using bd.machine.dal.Implementations;
+	using bal.Implementations;
+	using dal.Implementations;
 
 	class Program
 	{
@@ -24,16 +25,29 @@
 			using (var context = new Context("name=MySql"))
 			{
 				var unitOfWork = new UnitOfWork(context);
-				var urlService = new UrlService(unitOfWork);
+				var crawlerService = new CrawlerService(unitOfWork);
 				var rawHtmlService = new RawHtmlService(unitOfWork);
-
-				foreach (var uri in urlService.GetAllUris())
+				foreach (var crawlableUrl in crawlerService.GetCrawlableUrls()
+				         .Where(x => x.IsActivated == true)) 
 				{
-					var rawHtmlTask = GetRawHtmlAsync(uri.Value);
-					rawHtmlTask.Wait();
-					var sourceCode = rawHtmlTask.Result;
-
-					rawHtmlService.SaveRawHtmlAsByteArray(sourceCode, uri.Key);
+					Uri uri = null;
+					if (Uri.TryCreate(crawlableUrl.RawUrl, UriKind.Absolute, out uri))
+					{
+						var rawHtmlTask = GetRawHtmlAsync(uri);
+						rawHtmlTask.Wait();
+						var rawHtml = rawHtmlTask.Result;
+						if (rawHtml.Length <= 0)
+							Console.WriteLine("rawHtml size is too small: " + crawlableUrl.RawUrl);
+						else 
+						{
+							rawHtmlService.SaveRawHtmlAsByteArray(rawHtmlTask.Result, crawlableUrl.RawUrlId);
+							Console.WriteLine("crawling was successful: " + crawlableUrl.RawUrl);
+						}
+					}
+					else 
+					{
+						Console.WriteLine("cannot create uri: " + crawlableUrl.RawUrl);
+					}
 				}
 			}
 		}
