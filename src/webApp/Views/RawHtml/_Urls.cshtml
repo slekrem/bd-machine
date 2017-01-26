@@ -1,6 +1,16 @@
 ﻿@model bd.machine.webApp.ViewModels.RawHtml.RawHtmlUrlsViewModel
 
-@foreach(var textLine in Model.Urls)
-{
-@textLine <br></br>
-}
+<table class="table">
+	<thead>
+		<tr>
+			<th>Url</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach(var url in Model.Urls) {
+		<tr>
+			<td>@url</td>
+		</tr>
+		}
+	</tbody>
+</table>

@@ -79,6 +79,11 @@
 				.RawHtmlRepository
 				.RawHtmls
 				.Single(x => x.Id == rawHtmlId);
+			var rawHostEntity = _unitOfWork
+				.RawHostRepository
+				.RawHosts
+				.Single(x => x.Id == rawHtmlEntry.RawUrl.RawHostId);
+
 			var rawHtml = Encoding.Default.GetString(rawHtmlEntry.Data);
 
 			var htmlDocument = new HtmlDocument();
@@ -90,10 +95,16 @@
 				string hrefValue = node.GetAttributeValue("href", string.Empty);
 
 				Uri uri = null;
-				if (Uri.TryCreate(hrefValue, UriKind.Absolute, out uri)) 
+				if (Uri.TryCreate(hrefValue, UriKind.Absolute, out uri))
 				{
-					if(!string.IsNullOrWhiteSpace(uri.Host))
+					if (!string.IsNullOrWhiteSpace(uri.Host))
 						asd.Add(uri.OriginalString);
+					else {
+						var uriBuilder = new UriBuilder(uri);
+						uriBuilder.Scheme = "http://";
+						uriBuilder.Host = rawHostEntity.Data;
+						asd.Add(uriBuilder.Uri.ToString());
+					}
 				}
 			}
 			return asd;

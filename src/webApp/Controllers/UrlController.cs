@@ -2,6 +2,7 @@
 {
 	using System;
 	using System.Linq;
+	using System.Text;
 	using System.Web.Mvc;
 	using bal.Implementations;
 	using bal.Interfaces;
@@ -12,12 +13,14 @@
 
 	public class UrlController : Controller
 	{
+		private readonly IContext _context;
 		private readonly IUrlService _urlService;
-
+		
 		public UrlController(IContext context)
 		{
 			if (context == null)
 				throw new ArgumentNullException("context");
+			_context = context;
 		}
 
 		public UrlController() : this(new Context("name=MySql")) { }
@@ -57,6 +60,41 @@
 				Url = _urlService.GetUriByUrlId(id).ToString(),
 				RequestPagedList = GetUrlRequestsByUrlId(id, page.Value),
 			});
+		}
+
+		[HttpGet]
+		public ActionResult Data(int id) 
+		{
+			if (id <= 0)
+				throw new ArgumentOutOfRangeException("id");
+			return View(new UrlDataViewModel()
+			{
+				RawUrlId = id,
+				RawUrl = _context
+					.RawUrls
+					.Single(x => x.Id == id)
+					.Data,
+				RawHosts = _context
+					.RawHtmls
+					.Where(x => x.RawUrlId == id)
+					.ToList()
+					.Select(x => new UrlDataRawHtmlViewModel() 
+				{
+					Id = x.Id,
+					Timestamp = x.Timestamp,
+					Preview = ToPreview(x.Data)
+				})
+			});
+		}
+
+		private string ToPreview(byte[] rawHtml)
+		{
+			if (rawHtml == null)
+				throw new ArgumentNullException("rawHtml");
+			var html = Encoding.Default.GetString(rawHtml);
+			if (html.Length <= 16)
+				return html;
+			return html.Substring(0, 16);
 		}
 
 		private IPagedList<UrlRequestViewModel> GetUrlRequestsByUrlId(int urlId, int page)

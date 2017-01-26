@@ -10,14 +10,15 @@
 
 	public class RawHtmlController : Controller
 	{
+		private readonly IContext _context;
 		private readonly IRawHtmlService _rawHtmlService;
-		private readonly IUrlService _urlService;
 
 		public RawHtmlController(IContext context) 
 		{
 			if (context == null)
 				throw new ArgumentNullException("context");
 			var unitOfWork = new UnitOfWork(context);
+			_context = context;
 			_rawHtmlService = new RawHtmlService(unitOfWork);
 		}
 
@@ -27,15 +28,16 @@
 		{
 			if (id <= 0)
 				throw new ArgumentOutOfRangeException("id");
-			//var rawHtmlServiceModel = _rawHtmlService.GetRawHtmlRawHtmlServiceModelById(id);
+			return View(new RawHtmlDetailsViewModel() { });
+		}
 
-			return View(new RawHtmlDetailsViewModel()
+		public ActionResult Data(int id) 
+		{
+			if (id <= 0)
+				throw new ArgumentOutOfRangeException("id");
+			return View("Index", new RawHtmlIndexViewModel() 
 			{
-				//Url = _urlService.GetUriByUrlId(rawHtmlServiceModel.UrlId).ToString(),
-				//RawHtml = rawHtmlServiceModel.RawHtml,
-				//DownloadDateTime = rawHtmlServiceModel.DownloadDateTime.ToString(),
-				//PageTitle = _rawHtmlService.GetHtmlTitleFromRawHtml(rawHtmlServiceModel.RawHtml),
-				//HtmlMetaTags = _rawHtmlService.GetHtmlMetaTagsFromRawHtml(rawHtmlServiceModel.RawHtml)
+				Id = id
 			});
 		}
 

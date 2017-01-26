@@ -18,5 +18,8 @@
 
 		[Required]
 		public byte[] Data { get; set; }
+
+		[ForeignKey("RawUrlId")]
+		public virtual RawUrlEntity RawUrl { get; set; }
 	}
 }
