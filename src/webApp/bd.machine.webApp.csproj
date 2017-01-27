@@ -122,6 +122,10 @@
     <Compile Include="ViewModels\Url\UrlHtmlsViewModel.cs" />
     <Compile Include="Controllers\HtmlController.cs" />
     <Compile Include="ViewModels\Html\HtmlIdViewModel.cs" />
+    <Compile Include="ViewModels\Html\HtmlTextViewModel.cs" />
+    <Compile Include="ViewModels\Html\HtmlImagesViewModel.cs" />
+    <Compile Include="ViewModels\Html\HtmlUrlsViewModel.cs" />
+    <Compile Include="ViewModels\Html\HtmlHtmlViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Web.config" />

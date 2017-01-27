@@ -138,4 +138,14 @@
 				});
 		}
 	}
+
+	public static class Asd 
+	{
+		public static string ToHtml(this byte[] rawHtml) 
+		{
+			if (rawHtml == null)
+				throw new ArgumentNullException("rawHtml");
+			return Encoding.Default.GetString(rawHtml);
+		}
+	}
 }

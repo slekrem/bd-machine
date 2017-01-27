@@ -1,4 +1,5 @@
-﻿<div class="row">
+﻿@model bd.machine.webApp.ViewModels.Html.HtmlIdViewModel
+<div class="row">
 	<div class="col-md-12">
 		<div class="panel panel-default">
 			<div class="panel-heading">
@@ -6,12 +7,17 @@
 			</div>
 			<div class="panel-body">
 				<ul class="nav nav-tabs nav-justified">
-					<li role="presentation" class="active"><a href="#">Html</a></li>
-					<li role="presentation"><a href="#">Text</a></li>
-					<li role="presentation"><a href="#">Bilder</a></li>
-					<li role="presentation"><a href="#">Links</a></li>
+					<li role="presentation" @if(Model.Html != null) { @Html.Raw(@"class=""active"""); } ><a href="/Html/Html/@Model.Id">HTML</a></li>
+					<li role="presentation" @if(Model.Text != null) { @Html.Raw(@"class=""active"""); }><a href="/Html/Text/@Model.Id">Text</a></li>
+					<li role="presentation" @if(Model.Images != null) { @Html.Raw(@"class=""active"""); }><a href="/Html/Images/@Model.Id">Bilder</a></li>
+					<li role="presentation" @if(Model.Urls != null) { @Html.Raw(@"class=""active"""); }><a href="/Html/Urls/@Model.Id">Links</a></li>
 				</ul>
 			</div>
+			@if(Model.Html != null) {
+			<div class="panel-body">
+				@Model.Html.Raw
+			</div>
+			}
 		</div>
 	</div>
 </div>

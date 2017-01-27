@@ -5,6 +5,7 @@
 	using ViewModels.Html;
 	using dal.Implementations;
 	using dal.Interfaces;
+	using bd.machine.bal.Implementations;
 
 	public class HtmlController : Controller
     {
@@ -23,11 +24,61 @@
         {
 			if (id <= 0)
 				throw new ArgumentOutOfRangeException("id");
-			var html = _context.RawHtmls.Find(id);
 			return View (new HtmlIdViewModel() 
 			{
-				
+				Id = id
 			});
         }
+
+		public ActionResult Text(int id) 
+		{
+			if (id <= 0)
+				throw new ArgumentOutOfRangeException("id");
+			return View("Id", new HtmlIdViewModel() 
+			{
+				Id = id,
+				Text = new HtmlTextViewModel() { }
+			});
+		}
+
+		public ActionResult Images(int id)
+		{
+			if (id <= 0)
+				throw new ArgumentOutOfRangeException("id");
+			return View("Id", new HtmlIdViewModel()
+			{
+				Id = id,
+				Images = new HtmlImagesViewModel() { }
+			});
+		}
+
+		public ActionResult Urls(int id)
+		{
+			if (id <= 0)
+				throw new ArgumentOutOfRangeException("id");
+			return View("Id", new HtmlIdViewModel()
+			{
+				Id = id,
+				Urls = new HtmlUrlsViewModel() { }
+			});
+		}
+
+		public ActionResult Html(int id)
+		{
+			if (id <= 0)
+				throw new ArgumentOutOfRangeException("id");
+			return View("Id", new HtmlIdViewModel()
+			{
+				Id = id,
+				Html = new HtmlHtmlViewModel() 
+				{
+					Raw = _context
+						.RawHtmls
+						.Find(id)
+						.Data
+						.ToHtml()
+				}
+			});
+		}
     }
 }
