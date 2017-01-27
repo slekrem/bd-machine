@@ -17,6 +17,25 @@
 			<div class="panel-body">
 				@Model.Html.Raw
 			</div>
+			} else if(Model.Text != null) {
+			<div class="panel-body">
+				<table class="table">
+					<thead>
+						<tr>
+							<th>Text</th>
+						</tr>
+					</thead>
+					<tbody>
+						@foreach(var textLine in Model.Text.TextLines) {
+						<tr>
+							<td>
+								@textLine
+							</td>
+						</tr>
+						}
+					</tbody>
+				</table>
+			</div>
 			}
 		</div>
 	</div>

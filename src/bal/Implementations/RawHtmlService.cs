@@ -147,5 +147,38 @@
 				throw new ArgumentNullException("rawHtml");
 			return Encoding.Default.GetString(rawHtml);
 		}
+
+		public static HtmlDocument ToHtmlDocument(this byte[] rawHtml)
+		{
+			if (rawHtml == null)
+				throw new ArgumentNullException("rawHtml");
+			var htmlDocument = new HtmlDocument();
+			htmlDocument.LoadHtml(Encoding.Default.GetString(rawHtml));
+			return htmlDocument;
+		}
+
+		public static IEnumerable<string> GetTextLines(this HtmlDocument htmlDocument) 
+		{
+			if (htmlDocument == null)
+				throw new ArgumentNullException("htmlDocument");
+			var textLines = new List<string>();
+			htmlDocument
+				.DocumentNode
+				.SelectNodes("//text()")
+				.ToList()
+				.ForEach(x => 
+			{
+				if (!string.IsNullOrWhiteSpace(x.InnerText)) {
+					var parentNodeName = x.ParentNode.Name.ToLower();
+					if (parentNodeName != "script" &&
+						parentNodeName != "a" &&
+						parentNodeName != "title" &&
+						parentNodeName != "header") {
+						textLines.Add(x.InnerText);
+					}
+				}
+			});
+			return textLines;
+		}
 	}
 }

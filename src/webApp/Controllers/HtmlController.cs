@@ -37,7 +37,15 @@
 			return View("Id", new HtmlIdViewModel() 
 			{
 				Id = id,
-				Text = new HtmlTextViewModel() { }
+				Text = new HtmlTextViewModel() 
+				{
+					TextLines = _context
+						.RawHtmls
+						.Find(id)
+						.Data
+						.ToHtmlDocument()
+						.GetTextLines()
+				}
 			});
 		}
 
