@@ -25,6 +25,27 @@
 
 		public UrlController() : this(new Context("name=MySql")) { }
 
+
+		[HttpGet]
+		public ActionResult Htmls(int id) 
+		{
+			if (id <= 0)
+				throw new ArgumentOutOfRangeException("id");
+			return View(new UrlHtmlsViewModel()
+			{
+				Htmls = _context
+					.RawHtmls
+					.Where(rawHtml => rawHtml.RawUrlId == id)
+					.ToList()
+					.Select(rawHtml => new HtmlModel() 
+				{
+					Id = rawHtml.Id,
+					Timestamp = rawHtml.Timestamp.ToString(),
+					DataLength = rawHtml.Data.Length
+				})
+			});
+		}
+
 		[HttpGet]
 		public ActionResult Add()
 		{

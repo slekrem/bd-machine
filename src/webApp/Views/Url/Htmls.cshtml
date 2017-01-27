@@ -1,0 +1,27 @@
+﻿@model bd.machine.webApp.ViewModels.Url.UrlHtmlsViewModel
+<div class="row">
+	<div class="col-md-12">
+		<div class="panel panel-default">
+			<div class="panel-body">
+				<table class="table">
+					<thead>
+						<tr>
+							<th>Id</th>
+							<th>Zeitstempel</th>
+							<th>Datenlänge</th>
+						</tr>
+					</thead>
+					<tbody>
+						@foreach(var html in Model.Htmls) {
+						<tr>
+							<td>@html.Id</td>
+							<td>@html.Timestamp</td>
+							<td>@html.DataLength</td>
+						</tr>
+						} 
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>

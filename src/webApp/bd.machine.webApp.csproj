@@ -118,6 +118,7 @@
     <Compile Include="ViewModels\Host\HostModel.cs" />
     <Compile Include="ViewModels\Host\HostUrlsViewModel.cs" />
     <Compile Include="ViewModels\Host\UrlModel.cs" />
+    <Compile Include="ViewModels\Url\UrlHtmlsViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Web.config" />
@@ -154,6 +155,7 @@
     <Content Include="Views\Host\Index.cshtml" />
     <Content Include="Views\Url\Data.cshtml" />
     <Content Include="Views\Host\Urls.cshtml" />
+    <Content Include="Views\Url\Htmls.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\bal\bd.machine.bal.csproj">
