@@ -1,4 +1,4 @@
-﻿@model bd.machine.webApp.ViewModels.Host.HostIndexViewModel
+﻿@model bd.machine.webApp.ViewModels.Host.HostUrlsViewModel
 <div class="row">
 	<div class="col-md-12">
 		<div class="panel panel-default">
@@ -7,17 +7,19 @@
 					<thead>
 						<tr>
 							<th>Id</th>
-							<th>Host</th>
-							<th>Urls</th>
+							<th>Url</th>
+							<th>Sites</th>
 						</tr>
 					</thead>
 					<tbody>
-						@foreach(var host in Model.Hosts) {
+						@foreach(var url in Model.Urls) {
 						<tr>
-							<td>@host.Id</td>
-							<td>@host.Host</td>
 							<td>
-								<a href="/Host/Urls/@host.Id">@host.Urls</a>
+								@url.Id
+							</td>
+							<td>@url.Url</td>
+							<td> 
+								<a href="/Url/Htmls/@url.Id">@url.Htmls</a>
 							</td>
 						</tr>
 						} 
