@@ -90,6 +90,7 @@
     <Folder Include="ViewModels\RawHtml\" />
     <Folder Include="ViewModels\Crawler\" />
     <Folder Include="ViewModels\Host\" />
+    <Folder Include="ViewModels\Html\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\HomeController.cs" />
@@ -119,6 +120,8 @@
     <Compile Include="ViewModels\Host\HostUrlsViewModel.cs" />
     <Compile Include="ViewModels\Host\UrlModel.cs" />
     <Compile Include="ViewModels\Url\UrlHtmlsViewModel.cs" />
+    <Compile Include="Controllers\HtmlController.cs" />
+    <Compile Include="ViewModels\Html\HtmlIdViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Web.config" />
@@ -156,6 +159,7 @@
     <Content Include="Views\Url\Data.cshtml" />
     <Content Include="Views\Host\Urls.cshtml" />
     <Content Include="Views\Url\Htmls.cshtml" />
+    <Content Include="Views\Html\Id.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\bal\bd.machine.bal.csproj">

@@ -14,7 +14,9 @@
 					<tbody>
 						@foreach(var html in Model.Htmls) {
 						<tr>
-							<td>@html.Id</td>
+							<td>
+								<a href="/Html/Id/@html.Id">@html.Id</a>
+							</td>
 							<td>@html.Timestamp</td>
 							<td>@html.DataLength</td>
 						</tr>
