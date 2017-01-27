@@ -1,1 +1,29 @@
-﻿asd
+﻿@model bd.machine.webApp.ViewModels.Host.HostIndexViewModel
+<div class="row">
+	<div class="col-md-12">
+		<div class="panel panel-default">
+			<div class="panel-body">
+				<table class="table">
+					<thead>
+						<tr>
+							<th>Id</th>
+							<th>Host</th>
+							<th>Urls</th>
+						</tr>
+					</thead>
+					<tbody>
+						@foreach(var host in Model.Hosts) {
+						<tr>
+							<td>
+								<a href="/Host/Url/@host.Id">@host.Id</a>
+							</td>
+							<td>@host.Host</td>
+							<td>@host.Urls</td>
+						</tr>
+						} 
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
