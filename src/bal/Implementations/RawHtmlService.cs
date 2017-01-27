@@ -180,5 +180,34 @@
 			});
 			return textLines;
 		}
+
+		public static IEnumerable<string> GetUrls(this HtmlDocument htmlDocument, string originHost)
+		{
+			if (htmlDocument == null)
+				throw new ArgumentNullException("htmlDocument");
+			if (string.IsNullOrWhiteSpace(originHost))
+				throw new ArgumentNullException("originHost");
+			
+			var asd = new List<string>();
+			foreach (var node in htmlDocument.DocumentNode.SelectNodes("//a[@href]"))
+			{
+				// Get the value of the HREF attribute
+				string hrefValue = node.GetAttributeValue("href", string.Empty);
+
+				Uri uri = null;
+				if (Uri.TryCreate(hrefValue, UriKind.Absolute, out uri))
+				{
+					if (!string.IsNullOrWhiteSpace(uri.Host))
+						asd.Add(uri.OriginalString);
+					else {
+						var uriBuilder = new UriBuilder(uri);
+						uriBuilder.Scheme = "http://";
+						uriBuilder.Host = originHost;
+						asd.Add(uriBuilder.Uri.ToString());
+					}
+				}
+			}
+			return asd;
+		}
 	}
 }

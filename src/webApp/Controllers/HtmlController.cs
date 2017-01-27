@@ -67,7 +67,24 @@
 			return View("Id", new HtmlIdViewModel()
 			{
 				Id = id,
-				Urls = new HtmlUrlsViewModel() { }
+				Urls = new HtmlUrlsViewModel() 
+				{
+					Urls = _context
+						.RawHtmls
+						.Find(id)
+						.Data
+						.ToHtmlDocument()
+						.GetUrls(_context
+						         .RawHosts
+						         .Find(_context
+						               .RawUrls
+						               .Find(_context
+						                     .RawHtmls
+						                     .Find(id)
+						                     .RawUrlId)
+						               .RawHostId)
+						         .Data)
+				}
 			});
 		}
 

@@ -36,6 +36,25 @@
 					</tbody>
 				</table>
 			</div>
+			} else if(Model.Urls != null) {
+			<div class="panel-body">
+				<table class="table">
+					<thead>
+						<tr>
+							<th>Link</th>
+						</tr>
+					</thead>
+					<tbody>
+						@foreach(var url in Model.Urls.Urls) {
+						<tr>
+							<td>
+								@url
+							</td>
+						</tr>
+						}
+					</tbody>
+				</table>
+			</div>
 			}
 		</div>
 	</div>
