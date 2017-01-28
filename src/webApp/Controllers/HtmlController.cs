@@ -6,6 +6,8 @@
 	using dal.Implementations;
 	using dal.Interfaces;
 	using bd.machine.bal.Implementations;
+	using System.Collections.Generic;
+	using System.Linq;
 
 	public class HtmlController : Controller
     {
@@ -69,21 +71,7 @@
 				Id = id,
 				Urls = new HtmlUrlsViewModel() 
 				{
-					Urls = _context
-						.RawHtmls
-						.Find(id)
-						.Data
-						.ToHtmlDocument()
-						.GetUrls(_context
-						         .RawHosts
-						         .Find(_context
-						               .RawUrls
-						               .Find(_context
-						                     .RawHtmls
-						                     .Find(id)
-						                     .RawUrlId)
-						               .RawHostId)
-						         .Data)
+					Urls = GetUrls(id)
 				}
 			});
 		}
@@ -101,9 +89,50 @@
 						.RawHtmls
 						.Find(id)
 						.Data
-						.ToHtml()
+						.ToHtmlString()
 				}
 			});
+		}
+
+		public ActionResult Keywords(int id) 
+		{
+			if (id <= 0)
+				throw new ArgumentOutOfRangeException("id");
+			return View("Id", new HtmlIdViewModel()
+			{
+				Id = id,
+				Keywords = new HtmlKeywordsViewModel()
+				{
+					Keywords = _context
+						.RawHtmls
+						.Find(id)
+						.Data
+						.GetKeywordsFromRawHtmlData()
+						.OrderByDescending(x => x.Value)
+						.ToDictionary(x => x.Key, y => y.Value)
+				}
+			});
+		}
+
+		private IEnumerable<string> GetUrls(int rawHtmlId) 
+		{
+			if (rawHtmlId <= 0)
+				throw new ArgumentOutOfRangeException("rawHtmlId");
+			return _context
+						.RawHtmls
+						.Find(rawHtmlId)
+						.Data
+						.ToHtmlDocument()
+						.GetUrls(_context
+								 .RawHosts
+								 .Find(_context
+									   .RawUrls
+									   .Find(_context
+											 .RawHtmls
+											 .Find(rawHtmlId)
+											 .RawUrlId)
+									   .RawHostId)
+								 .Data);
 		}
     }
 }

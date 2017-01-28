@@ -27,7 +27,8 @@
 				var unitOfWork = new UnitOfWork(context);
 				var crawlerService = new CrawlerService(unitOfWork);
 				var rawHtmlService = new RawHtmlService(unitOfWork);
-				foreach (var crawlableUrl in crawlerService.GetCrawlableUrls()
+				foreach (var crawlableUrl in crawlerService
+				         .GetCrawlableUrls()
 				         .Where(x => x.IsActivated == true)) 
 				{
 					Uri uri = null;

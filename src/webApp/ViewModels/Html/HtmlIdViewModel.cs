@@ -11,5 +11,7 @@
 		public HtmlUrlsViewModel Urls { get; set; }
 
 		public HtmlHtmlViewModel Html { get; set; }
+
+		public HtmlKeywordsViewModel Keywords { get; set; }
 	}
 }

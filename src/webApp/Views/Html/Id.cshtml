@@ -8,6 +8,7 @@
 			<div class="panel-body">
 				<ul class="nav nav-tabs nav-justified">
 					<li role="presentation" @if(Model.Html != null) { @Html.Raw(@"class=""active"""); } ><a href="/Html/Html/@Model.Id">HTML</a></li>
+					<li role="presentation" @if(Model.Keywords != null) { @Html.Raw(@"class=""active"""); } ><a href="/Html/Keywords/@Model.Id">Keywords</a></li>
 					<li role="presentation" @if(Model.Text != null) { @Html.Raw(@"class=""active"""); }><a href="/Html/Text/@Model.Id">Text</a></li>
 					<li role="presentation" @if(Model.Images != null) { @Html.Raw(@"class=""active"""); }><a href="/Html/Images/@Model.Id">Bilder</a></li>
 					<li role="presentation" @if(Model.Urls != null) { @Html.Raw(@"class=""active"""); }><a href="/Html/Urls/@Model.Id">Links</a></li>
@@ -36,7 +37,7 @@
 					</tbody>
 				</table>
 			</div>
-			} else if(Model.Urls != null) {
+			} else if (Model.Urls != null) {
 			<div class="panel-body">
 				<table class="table">
 					<thead>
@@ -49,6 +50,29 @@
 						<tr>
 							<td>
 								@url
+							</td>
+						</tr>
+						}
+					</tbody>
+				</table>
+			</div>
+			} else if (Model.Keywords != null) {
+			<div class="panel-body">
+				<table class="table">
+					<thead>
+						<tr>
+							<th>Keyword</th>
+							<th>Anzahl</th>
+						</tr>
+					</thead>
+					<tbody>
+						@foreach(var keyword in Model.Keywords.Keywords) {
+						<tr>
+							<td>
+								@keyword.Key
+							</td>
+							<td>
+								@keyword.Value
 							</td>
 						</tr>
 						}

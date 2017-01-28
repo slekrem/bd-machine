@@ -126,6 +126,7 @@
     <Compile Include="ViewModels\Html\HtmlImagesViewModel.cs" />
     <Compile Include="ViewModels\Html\HtmlUrlsViewModel.cs" />
     <Compile Include="ViewModels\Html\HtmlHtmlViewModel.cs" />
+    <Compile Include="ViewModels\Html\HtmlKeywordsViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Web.config" />

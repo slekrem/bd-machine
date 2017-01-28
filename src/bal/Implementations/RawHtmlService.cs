@@ -141,7 +141,7 @@
 
 	public static class Asd 
 	{
-		public static string ToHtml(this byte[] rawHtml) 
+		public static string ToHtmlString(this byte[] rawHtml) 
 		{
 			if (rawHtml == null)
 				throw new ArgumentNullException("rawHtml");
@@ -157,6 +157,15 @@
 			return htmlDocument;
 		}
 
+		public static HtmlDocument ToHtmlDocument(this string rawHtml)
+		{
+			if (rawHtml == null)
+				throw new ArgumentNullException("rawHtml");
+			var htmlDocument = new HtmlDocument();
+			htmlDocument.LoadHtml(rawHtml);
+			return htmlDocument;
+		}
+
 		public static IEnumerable<string> GetTextLines(this HtmlDocument htmlDocument) 
 		{
 			if (htmlDocument == null)
@@ -166,19 +175,35 @@
 				.DocumentNode
 				.SelectNodes("//text()")
 				.ToList()
-				.ForEach(x => 
-			{
-				if (!string.IsNullOrWhiteSpace(x.InnerText)) {
-					var parentNodeName = x.ParentNode.Name.ToLower();
-					if (parentNodeName != "script" &&
-						parentNodeName != "a" &&
-						parentNodeName != "title" &&
-						parentNodeName != "header") {
-						textLines.Add(x.InnerText);
-					}
-				}
-			});
+				.ForEach(x => { if (x.HasText()) textLines.Add(x.InnerText); });
 			return textLines;
+		}
+
+		public static string GetTextFromHtmlSourceCode(this string htmlSourceCode) 
+		{
+			if (string.IsNullOrWhiteSpace(htmlSourceCode))
+				throw new ArgumentNullException("htmlSourceCode");
+			var text = string.Empty;
+			htmlSourceCode
+				.ToHtmlDocument()
+				.DocumentNode
+				.SelectNodes("//text()")
+				.ToList()
+				.ForEach(htmlNode => { if (htmlNode.HasText()) { text += htmlNode.InnerText; } });
+			return text;
+		}
+
+		public static bool HasText(this HtmlNode htmlNode) 
+		{
+			if (htmlNode == null)
+				return false;
+			if (string.IsNullOrWhiteSpace(htmlNode.InnerText))
+				return false;
+			var blackList = new[] { "script", "a", "title", "header" };
+			var parentNodeName = htmlNode.ParentNode.Name.ToLower();
+			if (blackList.Contains(parentNodeName))
+				return false;
+			return true;
 		}
 
 		public static IEnumerable<string> GetUrls(this HtmlDocument htmlDocument, string originHost)
@@ -208,6 +233,31 @@
 				}
 			}
 			return asd;
+		}
+
+		public static IDictionary<string, int> GetKeywordsFromRawHtmlData(this byte[] rawHtmlData) 
+		{
+			if (rawHtmlData == null)
+				throw new ArgumentNullException("rawHtmlData");
+			return rawHtmlData
+				.ToHtmlString()
+				.GetTextFromHtmlSourceCode()
+				.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)
+				.WordsCount();
+		}
+
+		public static IDictionary<string, int> WordsCount(this IEnumerable<string> words) 
+		{
+			if (words == null)
+				throw new ArgumentNullException("words");
+			var dictionary = new Dictionary<string, int>();
+			words.ToList().ForEach(word => {
+				if (dictionary.ContainsKey(word))
+					++dictionary[word];
+				else
+					dictionary.Add(word, 1);
+			});
+			return dictionary;
 		}
 	}
 }
