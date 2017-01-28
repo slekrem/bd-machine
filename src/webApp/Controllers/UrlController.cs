@@ -33,6 +33,8 @@
 				throw new ArgumentOutOfRangeException("id");
 			return View(new UrlHtmlsViewModel()
 			{
+				Id = id,
+				Url = _context.RawUrls.Find(id).Data,
 				Htmls = _context
 					.RawHtmls
 					.Where(rawHtml => rawHtml.RawUrlId == id)

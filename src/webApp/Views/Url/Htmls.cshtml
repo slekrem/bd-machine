@@ -2,6 +2,12 @@
 <div class="row">
 	<div class="col-md-12">
 		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title">@Model.Url</h3>
+			</div>
+			<div class="panel-body">
+				<canvas id="chart"></canvas>
+			</div>
 			<div class="panel-body">
 				<table class="table">
 					<thead>
@@ -27,3 +33,27 @@
 		</div>
 	</div>
 </div>
+
+@section Script{
+<script src="/Scripts/Charts/Common.js"></script>
+<script src="/Scripts/Charts/Data.js"></script>
+<script src="/Scripts/Charts/Options.js"></script>
+<script src="/Scripts/Charts/Config.js"></script>
+<script>
+	var myOptions = getOptions("Title", "X", "Y");
+	var myConfig = getConfig(myOptions);
+	
+	var chartContext = document.getElementById("chart");
+	var chart = new Chart(chartContext, myConfig);
+
+	$.get( "/Url/Data/@Model.Id", function(data) {
+		var urlsDataset = {
+                label: "Urls",
+                data: data,
+        };
+		myConfig.data.datasets.push(urlsDataset);
+		chart.update()
+	}, "json" );
+
+</script>
+}
