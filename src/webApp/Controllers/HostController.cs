@@ -40,6 +40,20 @@
 			});
         }
 
+		public ActionResult Id(int id) 
+		{
+			if (id <= 0)
+				throw new ArgumentOutOfRangeException("id");
+			return View("Id", new HostIdViewModel 
+			{
+				Id = id,
+				Host = _context
+					.RawHosts
+					.Find(id)
+					.Data
+			});
+		}
+
 		public ActionResult Urls(int id)
 		{
 			if (id <= 0)
@@ -61,6 +75,17 @@
 						.Count
 					})
 			});
+		}
+
+		public ActionResult Data(int id) 
+		{
+			if (id <= 0)
+				throw new ArgumentOutOfRangeException("id");
+			var months = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 };
+			return Json(
+				months.Select(month => _context.RawUrls.Where(x => x.RawHostId == id && x.Timestamp.Month == month)
+				              .ToList().Count),
+				JsonRequestBehavior.AllowGet);
 		}
     }
 }

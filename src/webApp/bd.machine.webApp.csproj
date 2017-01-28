@@ -91,6 +91,7 @@
     <Folder Include="ViewModels\Crawler\" />
     <Folder Include="ViewModels\Host\" />
     <Folder Include="ViewModels\Html\" />
+    <Folder Include="Scripts\Charts\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\HomeController.cs" />
@@ -127,6 +128,7 @@
     <Compile Include="ViewModels\Html\HtmlUrlsViewModel.cs" />
     <Compile Include="ViewModels\Html\HtmlHtmlViewModel.cs" />
     <Compile Include="ViewModels\Html\HtmlKeywordsViewModel.cs" />
+    <Compile Include="ViewModels\Host\HostIdViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Web.config" />
@@ -165,6 +167,11 @@
     <Content Include="Views\Host\Urls.cshtml" />
     <Content Include="Views\Url\Htmls.cshtml" />
     <Content Include="Views\Html\Id.cshtml" />
+    <Content Include="Views\Host\Id.cshtml" />
+    <Content Include="Scripts\Charts\Common.js" />
+    <Content Include="Scripts\Charts\Options.js" />
+    <Content Include="Scripts\Charts\Config.js" />
+    <Content Include="Scripts\Charts\Data.js" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\bal\bd.machine.bal.csproj">
