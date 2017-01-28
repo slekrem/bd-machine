@@ -8,6 +8,26 @@
 			<div class="panel-body">
 				<canvas id="chart"></canvas>
 			</div>
+			<div class="panel-body">
+				<table class="table">
+					<thead>
+						<tr>
+							<th>Id</th>
+							<th>Url</th>
+							<th>HTML-Seiten</th>
+						</tr>
+					</thead>
+					<tbody>
+						@foreach(var url in Model.Urls) {
+						<tr>
+							<td><a href="/Url/Id/@url.Id">@url.Id</a></td>
+							<td><a href="/Url/Id/@url.Id">@url.Url</a></td>
+							<td><a href="/Url/Htmls/@url.Id">@url.Htmls</a></td>
+						</tr>
+						}
+					</tbody>
+				</table>
+			</div>
 		</div>
 	</div>
 </div>

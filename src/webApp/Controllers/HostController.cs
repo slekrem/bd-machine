@@ -44,13 +44,25 @@
 		{
 			if (id <= 0)
 				throw new ArgumentOutOfRangeException("id");
-			return View("Id", new HostIdViewModel 
+			return View("Id", new HostIdViewModel
 			{
 				Id = id,
 				Host = _context
 					.RawHosts
 					.Find(id)
-					.Data
+					.Data,
+				Urls = _context
+					.RawUrls
+					.Where(url => url.RawHostId == id)
+					.Select(url => new UrlModel()
+					{
+						Id = url.Id,
+						Url = url.Data,
+						Htmls = _context
+						.RawHtmls
+						.Where(html => html.RawUrlId == url.Id)
+						.Count()
+					})
 			});
 		}
 
