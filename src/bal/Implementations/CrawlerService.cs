@@ -110,11 +110,11 @@
 
 	public static class CrawlerMagic 
 	{
-		private static HttpClient HttpClient ()
+		public static HttpClient CreateHttpClient()
 		{
 			return new HttpClient(new HttpClientHandler()
 			{
-				Proxy = new WebProxy("mysql", 8118),
+				Proxy = new WebProxy("torproxy", 8118),
 				UseProxy = true
 			});
 		}
@@ -125,7 +125,7 @@
 				throw new ArgumentNullException("uri");
 			ServicePointManager.ServerCertificateValidationCallback += (o, certificate, chain, errors) => true;
 			byte[] sourceCode;
-			using (var httpClient = HttpClient())
+			using (var httpClient = CreateHttpClient())
 			{
 				var asd = httpClient.GetByteArrayAsync(uri.OriginalString);
 				asd.Wait();

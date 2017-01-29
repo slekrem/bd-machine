@@ -88,12 +88,7 @@
 			ServicePointManager.ServerCertificateValidationCallback += (o, certificate, chain, errors) => true;
 			byte[] sourceCode;
 
-			using (var httpClient = new HttpClient(new HttpClientHandler()
-			{
-				Proxy = new WebProxy("mysql", 8118),
-				UseProxy = true
-			})
-			{ })
+			using (var httpClient = CrawlerMagic.CreateHttpClient())
 				sourceCode = await httpClient.GetByteArrayAsync(uri);
 			return sourceCode;
 		}
