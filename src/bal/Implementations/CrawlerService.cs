@@ -3,6 +3,8 @@
 	using System;
 	using System.Collections.Generic;
 	using System.Linq;
+	using System.Net;
+	using System.Net.Http;
 	using dal.Implementations.Entities;
 	using dal.Interfaces;
 	using Interfaces;
@@ -103,6 +105,33 @@
 				.RawHostRepository
 				.Create(rawHostEntity);
 			return rawHostEntity.Id;
+		}
+	}
+
+	public static class CrawlerMagic 
+	{
+		private static HttpClient HttpClient ()
+		{
+			return new HttpClient(new HttpClientHandler()
+			{
+				Proxy = new WebProxy("mysql", 8118),
+				UseProxy = true
+			});
+		}
+		
+		public static byte[] GetHtmlAsByteArrayFromUri(this Uri uri) 
+		{
+			if (uri == null)
+				throw new ArgumentNullException("uri");
+			ServicePointManager.ServerCertificateValidationCallback += (o, certificate, chain, errors) => true;
+			byte[] sourceCode;
+			using (var httpClient = HttpClient())
+			{
+				var asd = httpClient.GetByteArrayAsync(uri.OriginalString);
+				asd.Wait();
+				sourceCode = asd.Result;
+			}
+			return sourceCode;
 		}
 	}
 }

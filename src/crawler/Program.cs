@@ -43,6 +43,33 @@
 						{
 							rawHtmlService.SaveRawHtmlAsByteArray(rawHtmlTask.Result, crawlableUrl.RawUrlId);
 							Console.WriteLine("crawling was successful: " + crawlableUrl.RawUrl);
+
+							try 
+							{
+								rawHtmlTask
+								.Result
+								.ToHtmlString()
+								.ToHtmlDocument()
+								.GetUrls(crawlableUrl.RawUrl.ToAbsoluteUri().Host)
+								.ToList()
+								.ForEach(url =>
+								{
+									var urlAsUri = url.ToAbsoluteUri();
+									if (!context.IsUriInDatabase(urlAsUri))
+										context
+											.CreateUri(urlAsUri)
+											.Data
+											.ToAbsoluteUri()
+											.GetHtmlAsByteArrayFromUri()
+											.CreateRawHtmlFromByteArray(context, urlAsUri.GetRawUrlEntity(context).Id)
+											.ConsoleWriteLineFor(x => x.RawUrl.Data);
+								});
+							} 
+							catch (Exception e) 
+							{
+								Console.WriteLine(e.Message);
+							}
+
 						}
 					}
 					else 
@@ -63,7 +90,7 @@
 
 			using (var httpClient = new HttpClient(new HttpClientHandler()
 			{
-				Proxy = new WebProxy("torproxy", 8118),
+				Proxy = new WebProxy("mysql", 8118),
 				UseProxy = true
 			})
 			{ })

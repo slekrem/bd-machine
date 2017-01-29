@@ -1,8 +1,6 @@
 ﻿namespace bd.machine.bal.Implementations
 {
 	using System;
-	using Models;
-	using dal.Implementations.Models;
 	using dal.Interfaces;
 	using Interfaces;
 	using System.Linq;
@@ -10,12 +8,12 @@
 	using HtmlAgilityPack;
 	using bal.Models.Htmltags;
 	using System.Collections.Generic;
-	using bd.machine.dal.Implementations.Entities;
+	using dal.Implementations.Entities;
 
 	public class RawHtmlService : IRawHtmlService
 	{
 		private readonly IUnitOfWork _unitOfWork;
-		
+
 		public RawHtmlService(IUnitOfWork unitOfWork)
 		{
 			if (unitOfWork == null)
@@ -59,9 +57,9 @@
 				{
 					var parentNodeName = node.ParentNode.Name.ToLower();
 					if (parentNodeName != "script" &&
-					    parentNodeName != "a" &&
-					    parentNodeName != "title" &&
-					    parentNodeName != "header")
+						parentNodeName != "a" &&
+						parentNodeName != "title" &&
+						parentNodeName != "header")
 					{
 						asd.Add(node.InnerText);
 					}
@@ -139,9 +137,9 @@
 		}
 	}
 
-	public static class Asd 
+	public static class Asd
 	{
-		public static string ToHtmlString(this byte[] rawHtml) 
+		public static string ToHtmlString(this byte[] rawHtml)
 		{
 			if (rawHtml == null)
 				throw new ArgumentNullException("rawHtml");
@@ -166,7 +164,7 @@
 			return htmlDocument;
 		}
 
-		public static IEnumerable<string> GetTextLines(this HtmlDocument htmlDocument) 
+		public static IEnumerable<string> GetTextLines(this HtmlDocument htmlDocument)
 		{
 			if (htmlDocument == null)
 				throw new ArgumentNullException("htmlDocument");
@@ -179,7 +177,7 @@
 			return textLines;
 		}
 
-		public static string GetTextFromHtmlSourceCode(this string htmlSourceCode) 
+		public static string GetTextFromHtmlSourceCode(this string htmlSourceCode)
 		{
 			if (string.IsNullOrWhiteSpace(htmlSourceCode))
 				throw new ArgumentNullException("htmlSourceCode");
@@ -193,7 +191,7 @@
 			return text;
 		}
 
-		public static bool HasText(this HtmlNode htmlNode) 
+		public static bool HasText(this HtmlNode htmlNode)
 		{
 			if (htmlNode == null)
 				return false;
@@ -212,7 +210,7 @@
 				throw new ArgumentNullException("htmlDocument");
 			if (string.IsNullOrWhiteSpace(originHost))
 				throw new ArgumentNullException("originHost");
-			
+
 			var asd = new List<string>();
 			foreach (var node in htmlDocument.DocumentNode.SelectNodes("//a[@href]"))
 			{
@@ -235,7 +233,7 @@
 			return asd;
 		}
 
-		public static IDictionary<string, int> GetKeywordsFromRawHtmlData(this byte[] rawHtmlData) 
+		public static IDictionary<string, int> GetKeywordsFromRawHtmlData(this byte[] rawHtmlData)
 		{
 			if (rawHtmlData == null)
 				throw new ArgumentNullException("rawHtmlData");
@@ -246,18 +244,37 @@
 				.WordsCount();
 		}
 
-		public static IDictionary<string, int> WordsCount(this IEnumerable<string> words) 
+		public static IDictionary<string, int> WordsCount(this IEnumerable<string> words)
 		{
 			if (words == null)
 				throw new ArgumentNullException("words");
 			var dictionary = new Dictionary<string, int>();
-			words.ToList().ForEach(word => {
+			words.ToList().ForEach(word =>
+			{
 				if (dictionary.ContainsKey(word))
 					++dictionary[word];
 				else
 					dictionary.Add(word, 1);
 			});
 			return dictionary;
+		}
+
+		public static Uri ToUri(this string uriString, UriKind uriKind) 
+		{
+			if (string.IsNullOrWhiteSpace(uriString)) return null;
+			Uri uri = null;
+			Uri.TryCreate(uriString, uriKind, out uri);
+			return uri;
+		}
+
+		public static Uri ToAbsoluteUri(this string uriString) 
+		{
+			if (string.IsNullOrWhiteSpace(uriString))
+				throw new ArgumentNullException("uriString");
+			Uri uri = null;
+			if (!Uri.TryCreate(uriString, UriKind.Absolute, out uri))
+				throw new Exception();
+			return uri;
 		}
 	}
 }
