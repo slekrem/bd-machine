@@ -2,15 +2,14 @@
 {
 	using System;
 	using System.Linq;
-	using System.Net;
-	using System.Net.Http;
 	using System.Threading;
-	using System.Threading.Tasks;
 	using bal.Implementations;
 	using dal.Implementations;
 
 	class Program
 	{
+		private static bool _crawlerIsBusy;
+
 		public static void Main(string[] args)
 		{
 			using (var timer = new Timer(StartCrawling, null, 0, 600000))
@@ -22,75 +21,42 @@
 
 		private static void StartCrawling(object state)
 		{
-			using (var context = new Context("name=MySql"))
+			if (_crawlerIsBusy)
+				return;
+			_crawlerIsBusy = true;
+			try
 			{
-				var unitOfWork = new UnitOfWork(context);
-				var crawlerService = new CrawlerService(unitOfWork);
-				var rawHtmlService = new RawHtmlService(unitOfWork);
-				foreach (var crawlableUrl in crawlerService
-				         .GetCrawlableUrls()
-				         .Where(x => x.IsActivated == true)) 
+				using (var context = new Context("name=MySql"))
 				{
-					Uri uri = null;
-					if (Uri.TryCreate(crawlableUrl.RawUrl, UriKind.Absolute, out uri))
+					context
+						.CrawlableUrls
+						.Where(x => x.IsActivated == true)
+						.ToList()
+						.ForEach(crawlableUrl =>
 					{
-						var rawHtmlTask = GetRawHtmlAsync(uri);
-						rawHtmlTask.Wait();
-						var rawHtml = rawHtmlTask.Result;
-						if (rawHtml.Length <= 0)
-							Console.WriteLine("rawHtml size is too small: " + crawlableUrl.RawUrl);
-						else 
-						{
-							rawHtmlService.SaveRawHtmlAsByteArray(rawHtmlTask.Result, crawlableUrl.RawUrlId);
-							Console.WriteLine("crawling was successful: " + crawlableUrl.RawUrl);
-
-							try 
-							{
-								rawHtmlTask
-								.Result
-								.ToHtmlString()
-								.ToHtmlDocument()
-								.GetUrls(crawlableUrl.RawUrl.ToAbsoluteUri().Host)
-								.ToList()
-								.ForEach(url =>
-								{
-									var urlAsUri = url.ToAbsoluteUri();
-									if (!context.IsUriInDatabase(urlAsUri))
-										context
-											.CreateUri(urlAsUri)
-											.Data
-											.ToAbsoluteUri()
-											.GetHtmlAsByteArrayFromUri()
-											.CreateRawHtmlFromByteArray(context, urlAsUri.GetRawUrlEntity(context).Id)
-											.ConsoleWriteLineFor(x => x.RawUrl.Data);
-								});
-							} 
-							catch (Exception e) 
-							{
-								Console.WriteLine(e.Message);
-							}
-
-						}
-					}
-					else 
-					{
-						Console.WriteLine("cannot create uri: " + crawlableUrl.RawUrl);
-					}
+						var uri = crawlableUrl.ToUri();
+						var rawHtmlEntity = uri
+							.GetHtmlAsByteArrayFromUri()
+							.CreateRawHtmlFromByteArray(context, crawlableUrl.RawUrlId);
+						rawHtmlEntity
+							.Data
+							.ToHtmlString()
+							.ToHtmlDocument()
+							.GetAbsoluteUrls(uri.Host)
+							.CreateCrawledHosts(context, rawHtmlEntity.Id)
+							.CreateCrawledUrls(context, rawHtmlEntity.Id)
+							.Select(x => context.GetOrCreateCrawlableUrl(x))
+							.ToList();
+						crawlableUrl.IsActivated = false;
+						context.UpdateCrawlableUrl(crawlableUrl);
+					});
 				}
 			}
-		}
-
-		private static async Task<byte[]> GetRawHtmlAsync(Uri uri)
-		{
-			if (uri == null)
-				throw new ArgumentNullException("uri");
-
-			ServicePointManager.ServerCertificateValidationCallback += (o, certificate, chain, errors) => true;
-			byte[] sourceCode;
-
-			using (var httpClient = CrawlerMagic.CreateHttpClient())
-				sourceCode = await httpClient.GetByteArrayAsync(uri);
-			return sourceCode;
+			catch (Exception e)
+			{
+				Console.WriteLine(e.Message);
+			}
+			_crawlerIsBusy = false;
 		}
 	}
 }
