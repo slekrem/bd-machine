@@ -10,13 +10,10 @@
 
 	public class CrawlerController : Controller
 	{
-		private readonly ICrawlerService _crawlerService;
-
 		public CrawlerController(IContext context) 
 		{
 			if (context == null)
 				throw new ArgumentNullException("context");
-			_crawlerService = new CrawlerService(new UnitOfWork(context));
 		}
 
 		public CrawlerController() : this(new Context("name=MySql")) { }
@@ -26,7 +23,7 @@
 		{
 			return View(new CrawlerIndexViewModel() 
 			{
-				CrawlableUrls = _crawlerService.GetCrawlableUrls()
+				//CrawlableUrls = _crawlerService.GetCrawlableUrls()
 			});
 		}
 
@@ -40,6 +37,9 @@
 		[ValidateAntiForgeryToken]
 		public ActionResult AddUrl(CrawlerAddUrlViewModel viewModel)
 		{
+			throw new NotImplementedException();
+			/*
+
 			if (viewModel == null)
 				throw new ArgumentNullException("viewModel");
 			if (!ModelState.IsValid)
@@ -48,6 +48,7 @@
 			if (!Uri.TryCreate(viewModel.Url, UriKind.Absolute, out uri))
 				return View(viewModel);
 			return RedirectToAction("CrawlableUrl", new { id = _crawlerService.AddCrawlableUrl(uri) });
+			*/
 		}
 
 		[HttpGet]

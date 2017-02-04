@@ -10,17 +10,9 @@
 	using Interfaces;
 	using Models;
 
+	/*
 	public class CrawlerService : ICrawlerService
 	{
-		private readonly IUnitOfWork _unitOfWork;
-
-		public CrawlerService(IUnitOfWork unitOfWork) 
-		{
-			if (unitOfWork == null)
-				throw new ArgumentNullException("unitOfWork");
-			_unitOfWork = unitOfWork;
-		}
-
 		public int AddCrawlableUrl(Uri uri)
 		{
 			if (uri == null)
@@ -107,6 +99,7 @@
 			return rawHostEntity.Id;
 		}
 	}
+	*/
 
 	public static class CrawlerMagic 
 	{
@@ -132,6 +125,16 @@
 				sourceCode = asd.Result;
 			}
 			return sourceCode;
+		}
+
+		public static T Log<T>(this T type, Func<T, string> func) where T : class 
+		{
+			if (type == null)
+				throw new ArgumentNullException("type");
+			if (func == null)
+				throw new ArgumentNullException("func");
+			Console.WriteLine(func(type));
+			return type;
 		}
 	}
 }

@@ -25,6 +25,19 @@
 
 		public UrlController() : this(new Context("name=MySql")) { }
 
+		[HttpGet]
+		public ActionResult NodesAsJson(int id) 
+		{
+			if (id <= 0)
+				throw new ArgumentOutOfRangeException("id");
+			return Json("asd");
+		}
+
+
+
+
+
+
 
 		[HttpGet]
 		public ActionResult Htmls(int id) 

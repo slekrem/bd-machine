@@ -2,65 +2,106 @@
 
 <div class="row">
 	<div class="col-md-12">
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				<h3 class="panel-title">Übersicht</h3>
+		<form action="/Home/Url" method="post">
+			<div class="form-group">
+				@Html.AntiForgeryToken()
+				@Html.TextBoxFor(m => m.Url, new { type="url", @class="form-control", placeholder="https://bd-machine.smerkel.com/" })
 			</div>
-			<div class="panel-body">
-				<div id="mynetwork"></div>
-			</div>
-			<table class="table">
-				<thead>
-					<tr>
-						<th>Id</th>
-						<th>Host</th>
-						<th>Urls</th>
-						<th>Seiten</th>
-					</tr>
-				</thead>
-				<tbody>
-					@foreach(var host in Model.Hosts) {
-					<tr>
-						<td>@host.Id</td>
-						<td>
-							<a href="/Host/@host.Id">@host.Host</a>
-						</td>
-						<td>@host.Urls</td>
-						<td>@host.Sites</td>
-					</tr>
-					}
-				</tbody>
-			</table>
-		</div>
+		</form>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-12">
+		<canvas id="canvas"></canvas>
 	</div>
 </div>
 
 @section Script{
-<script type="text/javascript">
-  // create an array with nodes
-  var nodes = new vis.DataSet([
-    {id: 1, label: 'Node 1'},
-    {id: 2, label: 'Node 2'},
-    {id: 3, label: 'Node 3'},
-    {id: 4, label: 'Node 4'},
-    {id: 5, label: 'Node 5'}
-  ]);
+<script>
+	var randomScalingFactor = function() {
+		return Math.round(Math.random() * 100);
+	};
+	var randomColorFactor = function() {
+		return Math.round(Math.random() * 255);
+	};
+	var randomColor = function(opacity) {
+		return 'rgba(' + randomColorFactor() + ',' + randomColorFactor() + ',' + randomColorFactor() + ',' + (opacity || '.3') + ')';
+	};
+	var config = {
+		type: 'line',
+		data: {
+			labels: [ "Januar", "Februar", "März",
+				"April", "Mai", "Juni",
+				"Juli", "August", "September",
+				"Oktober", "November", "Dezember" ],
+		},
+		options: {
+			responsive: true,
+			title:{
+				display:true,
+				text:'Übersicht'
+			},
+			tooltips: {
+				mode: 'label',
+				callbacks: { }
+			},
+			hover: {
+				mode: 'dataset'
+			},
+			scales: {
+				xAxes: [{
+					display: true,
+					scaleLabel: {
+						display: true,
+						labelString: 'Monat'
+					}
+				}],
+				yAxes: [{
+					display: true,
+					scaleLabel: {
+						display: true,
+						labelString: 'Anzahl'
+					}
+				}]
+			}
+		}
+	};
 
-  // create an array with edges
-  var edges = new vis.DataSet([
-    {from: 1, to: 3},
-    {from: 1, to: 2},
-    {from: 2, to: 4},
-    {from: 2, to: 5}
-  ]);
+	window.onload = function() {
+		var ctx = document.getElementById("canvas").getContext("2d");
+		window.myLine = new Chart(ctx, config);
+	};
 
-  // create a network
-  var container = document.getElementById('mynetwork');
-  var data = {
-    nodes: nodes,
-    edges: edges
-  };
-  var options = {};
-  var network = new vis.Network(container, data, options);
+	$.get("Api/RawHostsThisYearInMonths", function(data){
+		config.data.datasets.push({
+                    label: "Hosts",
+                    data: data,
+                    fill: false,
+                    borderDash: [5, 5],
+					borderColor: randomColor(0.4),
+					backgroundColor: randomColor(0.5),
+					pointBorderColor: randomColor(0.7),
+					pointBackgroundColor: randomColor(0.5),
+					pointBorderWidth: 1
+                });
+		window.myLine.update();
+	});
+
+	$.get("Api/RawUrlsThisYearInMonths", function(data){ 
+		config.data.datasets.push({
+                    label: "Urls",
+                    data: data,
+                    fill: false,
+                    borderDash: [5, 5],
+					borderColor: randomColor(0.4),
+					backgroundColor: randomColor(0.5),
+					pointBorderColor: randomColor(0.7),
+					pointBackgroundColor: randomColor(0.5),
+					pointBorderWidth: 1
+                });
+		window.myLine.update();
+	});
+	
 </script>
 }

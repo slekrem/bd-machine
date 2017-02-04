@@ -34,19 +34,36 @@
 						.ToList()
 						.ForEach(crawlableUrl =>
 					{
-						var uri = crawlableUrl.ToUri();
-						var rawHtmlEntity = uri
-							.GetHtmlAsByteArrayFromUri()
-							.CreateRawHtmlFromByteArray(context, crawlableUrl.RawUrlId);
-						rawHtmlEntity
-							.Data
-							.ToHtmlString()
-							.ToHtmlDocument()
-							.GetAbsoluteUrls(uri.Host)
-							.CreateCrawledHosts(context, rawHtmlEntity.Id)
-							.CreateCrawledUrls(context, rawHtmlEntity.Id)
-							.Select(x => context.GetOrCreateCrawlableUrl(x))
-							.ToList();
+						try 
+						{
+							var uri = crawlableUrl.ToUri();
+							var rawHtmlEntity = uri
+								.GetHtmlAsByteArrayFromUri()
+								.CreateRawHtmlFromByteArray(context, crawlableUrl.RawUrlId)
+								.Log(x => string.Format("CreateRawHtmlFromByteArray: {0}", x.RawUrl.Data));
+							var crawledUrls = rawHtmlEntity
+								.Data
+								.ToHtmlString()
+								.ToHtmlDocument()
+								.GetAbsoluteUrls(uri.Host);
+
+							crawledUrls
+								.Select(x => context.CreateCrawledHost(x, rawHtmlEntity.Id)
+										.Log(y => string.Format("CreateCrawledHost: {0}", y.RawHost.Data)))
+								.ToList();
+							crawledUrls
+								.Select(x => context.CreateCrawledUrl(x, rawHtmlEntity.Id)
+										.Log(y => string.Format("CreateCrawledUrl: {0}", y.RawUrl.Data)))
+								.ToList();
+							crawledUrls
+								.Select(x => context.GetOrCreateCrawlableUrl(x)
+										.Log(y => string.Format("GetOrCreateCrawlableUrl: {0}", y.RawUrl.Data)))
+								.ToList();
+						} 
+						catch (Exception e) 
+						{
+							Console.WriteLine(e.Message);
+						}
 						crawlableUrl.IsActivated = false;
 						context.UpdateCrawlableUrl(crawlableUrl);
 					});

@@ -9,18 +9,10 @@
 	using bal.Models.Htmltags;
 	using System.Collections.Generic;
 	using dal.Implementations.Entities;
+	using bd.machine.dal.Implementations;
 
 	public class RawHtmlService : IRawHtmlService
 	{
-		private readonly IUnitOfWork _unitOfWork;
-
-		public RawHtmlService(IUnitOfWork unitOfWork)
-		{
-			if (unitOfWork == null)
-				throw new ArgumentNullException("unitOfWork");
-			_unitOfWork = unitOfWork;
-		}
-
 		public IEnumerable<HtmlMetaTag> GetHtmlMetaTagsFromRawHtml(string rawHtml)
 		{
 			if (string.IsNullOrWhiteSpace(rawHtml))
@@ -40,6 +32,9 @@
 
 		public IEnumerable<string> GetHtmlTextByRawHtmlId(int rawHtmlId)
 		{
+			throw new ArgumentNullException();
+			
+			/*
 			if (rawHtmlId <= 0)
 				throw new ArgumentOutOfRangeException("rawHtmlId");
 			var rawHtmlEntry = _unitOfWork
@@ -67,10 +62,13 @@
 			}
 
 			return asd;
+			*/
 		}
 
 		public IEnumerable<string> GetUrlsFromRawHtmlById(int rawHtmlId)
 		{
+			throw new ArgumentNullException();
+			/*
 			if (rawHtmlId <= 0)
 				throw new ArgumentOutOfRangeException("rawHtmlId");
 			var rawHtmlEntry = _unitOfWork
@@ -106,6 +104,7 @@
 				}
 			}
 			return asd;
+			*/
 		}
 
 		public string GetHtmlTitleFromRawHtml(string rawHtml)
@@ -122,6 +121,8 @@
 
 		public void SaveRawHtmlAsByteArray(byte[] rawHtml, int rawUrlId)
 		{
+			throw new NotImplementedException();
+			/*
 			if (rawHtml == null)
 				throw new ArgumentNullException("rawHtml");
 			if (rawUrlId <= 0)
@@ -134,6 +135,7 @@
 					Data = rawHtml,
 					Timestamp = DateTime.UtcNow
 				});
+			*/
 		}
 	}
 
@@ -202,6 +204,45 @@
 			if (blackList.Contains(parentNodeName))
 				return false;
 			return true;
+		}
+
+		public static IEnumerable<Uri> GetAbsoluteUrls(this HtmlDocument htmlDocument, string originHost) 
+		{
+			if (htmlDocument == null)
+				throw new ArgumentNullException("htmlDocument");
+			if (string.IsNullOrWhiteSpace(originHost))
+				throw new ArgumentNullException("originHost");
+			try 
+			{
+				var absoluteUrls = new List<Uri>();
+				htmlDocument
+					.DocumentNode
+					.SelectNodes("//a[@href]")
+					.ToList()
+					.ForEach(node =>
+				{
+					string hrefValue = node.GetAttributeValue("href", string.Empty);
+					Uri url = null;
+					if (Uri.TryCreate(hrefValue, UriKind.Absolute, out url))
+					{
+						if (!string.IsNullOrWhiteSpace(url.Host))
+							absoluteUrls.Add(url);
+						else
+						{
+							var uriBuilder = new UriBuilder(url);
+							uriBuilder.Scheme = "http://";
+							uriBuilder.Host = originHost;
+							absoluteUrls.Add(uriBuilder.Uri);
+						}
+					}
+				});
+				return absoluteUrls;
+			} 
+			catch (Exception e) 
+			{
+				Console.WriteLine(e.Message);
+				return new List<Uri>();
+			}
 		}
 
 		public static IEnumerable<string> GetUrls(this HtmlDocument htmlDocument, string originHost)
@@ -275,6 +316,48 @@
 			if (!Uri.TryCreate(uriString, UriKind.Absolute, out uri))
 				throw new Exception();
 			return uri;
+		}
+
+		public static Uri ToAbsoluteUriOrDefault(this string uriString)
+		{
+			if (string.IsNullOrWhiteSpace(uriString))
+				return null;
+			Uri uri = null;
+			if (!Uri.TryCreate(uriString, UriKind.Absolute, out uri))
+				return null;
+			return uri;
+		}
+
+		public static IEnumerable<Uri> CreateCrawledHosts(this IEnumerable<Uri> urls, IContext context, int rawHtmlId)
+		{
+			if (urls == null)
+				throw new ArgumentNullException("urls");
+			if (context == null)
+				throw new ArgumentNullException("context");
+			if (rawHtmlId <= 0)
+				throw new ArgumentOutOfRangeException("rawHtmlId");
+			urls.ToList().ForEach(url => 
+			{
+				var rawHostEntity = url.GetOrCreateRawHostEntity(context);
+				context.CreateCrawledHostEntity(rawHostEntity.Id, rawHtmlId);
+			});
+			return urls;
+		}
+
+		public static IEnumerable<Uri> CreateCrawledUrls(this IEnumerable<Uri> urls, IContext context, int rawHtmlId) 
+		{
+			if (urls == null)
+				throw new ArgumentNullException("urls");
+			if (context == null)
+				throw new ArgumentNullException("context");
+			if (rawHtmlId <= 0)
+				throw new ArgumentOutOfRangeException("rawHtmlId");
+			urls.ToList().ForEach(url => 
+			{
+				var rawUrlEntity = context.GetOrCreateRawUrlEntity(url);
+				context.CreateCrawledUrlEntity(rawUrlEntity.Id, rawHtmlId);
+			});
+			return urls;
 		}
 	}
 }

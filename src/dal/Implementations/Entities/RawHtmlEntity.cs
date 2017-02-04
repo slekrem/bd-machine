@@ -4,7 +4,7 @@
 	using System.ComponentModel.DataAnnotations;
 	using System.ComponentModel.DataAnnotations.Schema;
 
-	[Table("RawHtmlAsd")]
+	[Table("RawHtml")]
 	public class RawHtmlEntity
 	{
 		[Key]

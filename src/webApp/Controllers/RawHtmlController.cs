@@ -11,15 +11,12 @@
 	public class RawHtmlController : Controller
 	{
 		private readonly IContext _context;
-		private readonly IRawHtmlService _rawHtmlService;
 
 		public RawHtmlController(IContext context) 
 		{
 			if (context == null)
 				throw new ArgumentNullException("context");
-			var unitOfWork = new UnitOfWork(context);
 			_context = context;
-			_rawHtmlService = new RawHtmlService(unitOfWork);
 		}
 
 		public RawHtmlController() : this(new Context("name=MySql")) { }
@@ -69,7 +66,7 @@
 				throw new ArgumentOutOfRangeException("rawHtmlId");
 			return new RawHtmlUrlsViewModel()
 			{
-				Urls = _rawHtmlService.GetUrlsFromRawHtmlById(rawHtmlId)
+				//Urls = _rawHtmlService.GetUrlsFromRawHtmlById(rawHtmlId)
 			};
 		}
 
@@ -79,7 +76,7 @@
 				throw new ArgumentOutOfRangeException("rawHtmlId");
 			return new RawHtmlTextViewModel()
 			{
-				Text = _rawHtmlService.GetHtmlTextByRawHtmlId(rawHtmlId)
+				//Text = _rawHtmlService.GetHtmlTextByRawHtmlId(rawHtmlId)
 			};
 		}
 	}

@@ -4,6 +4,8 @@
 
 	public class HomeIndexViewModel
 	{
+		public string Url { get; set; }
+		
 		public IEnumerable<HomeIndexHostViewModel> Hosts { get; set; }
 	}
 }

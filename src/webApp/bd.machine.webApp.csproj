@@ -130,6 +130,8 @@
     <Compile Include="ViewModels\Html\HtmlKeywordsViewModel.cs" />
     <Compile Include="ViewModels\Host\HostIdViewModel.cs" />
     <Compile Include="ViewModels\Url\HtmlModel.cs" />
+    <Compile Include="ViewModels\Home\HomeUrlViewModel.cs" />
+    <Compile Include="Controllers\ApiController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Web.config" />
@@ -173,6 +175,7 @@
     <Content Include="Scripts\Charts\Options.js" />
     <Content Include="Scripts\Charts\Config.js" />
     <Content Include="Scripts\Charts\Data.js" />
+    <Content Include="Views\Home\Url.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\bal\bd.machine.bal.csproj">

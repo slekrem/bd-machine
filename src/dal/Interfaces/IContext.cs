@@ -2,25 +2,11 @@
 {
 	using System;
 	using System.Data.Entity;
+	using System.Data.Entity.Infrastructure;
 	using Implementations.Entities;
-	using Implementations.Models;
 
 	public interface IContext : IDisposable
 	{
-		DbSet<Scheme> Schemes { get; set; }
-
-		DbSet<Host> Hosts { get; set; }
-
-		DbSet<Path> Paths { get; set; }
-
-		DbSet<Port> Ports { get; set; }
-
-		DbSet<Query> Queries { get; set; }
-
-		DbSet<Fragment> Fragments { get; set; }
-
-		DbSet<UrlMetadata> UrlMetadatas { get; set; }
-
 		DbSet<RawHtmlEntity> RawHtmls { get; set; }
 
 		DbSet<RawHostEntity> RawHosts { get; set; }
@@ -29,6 +15,12 @@
 
 		DbSet<CrawlableUrlEntity> CrawlableUrls { get; set; }
 
+		DbSet<CrawledHostEntity> CrawledHosts { get; set; }
+
+		DbSet<CrawledUrlEntity> CrawledUrls { get; set; }
+
 		int SaveChanges();
+
+		DbEntityEntry Entry(object entity);
 	}
 }

@@ -4,20 +4,23 @@
 	using System.ComponentModel.DataAnnotations;
 	using System.ComponentModel.DataAnnotations.Schema;
 
-	[Table("RawUrl")]
-	public class RawUrlEntity
+	[Table("CrawledHost")]
+	public class CrawledHostEntity
 	{
 		[Key]
 		public int Id { get; set; }
 
 		[Required]
+		public int RawHtmlId { get; set; }
+
+		[Required]
 		public int RawHostId { get; set; }
 
 		[Required]
-		public DateTime Timestamp { get; set; }
+		public DateTime UtcTimestamp { get; set; }
 
-		[Required]
-		public string Data { get; set; }
+		[ForeignKey("RawHtmlId")]
+		public virtual RawHtmlEntity RawHtml { get; set; }
 
 		[ForeignKey("RawHostId")]
 		public virtual RawHostEntity RawHost { get; set; }

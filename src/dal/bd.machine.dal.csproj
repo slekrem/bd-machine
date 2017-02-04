@@ -48,44 +48,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Interfaces\IContext.cs" />
     <Compile Include="Implementations\Context.cs" />
-    <Compile Include="Implementations\Models\Fragment.cs" />
-    <Compile Include="Implementations\Models\Host.cs" />
-    <Compile Include="Implementations\Models\Path.cs" />
-    <Compile Include="Implementations\Models\Port.cs" />
-    <Compile Include="Implementations\Models\Query.cs" />
-    <Compile Include="Implementations\Models\Scheme.cs" />
-    <Compile Include="Implementations\Models\UrlMetadata.cs" />
-    <Compile Include="Interfaces\IUnitOfWork.cs" />
-    <Compile Include="Interfaces\Repositories\IFragmentRepository.cs" />
-    <Compile Include="Interfaces\Repositories\IHostRepository.cs" />
-    <Compile Include="Interfaces\Repositories\IPathRepository.cs" />
-    <Compile Include="Interfaces\Repositories\IPortRepository.cs" />
-    <Compile Include="Interfaces\Repositories\IQueryRepository.cs" />
-    <Compile Include="Interfaces\Repositories\ISchemeRepository.cs" />
-    <Compile Include="Interfaces\Repositories\IUrlMetadataRepository.cs" />
-    <Compile Include="Implementations\Repositories\FragmentRepository.cs" />
-    <Compile Include="Implementations\Repositories\HostRepository.cs" />
-    <Compile Include="Implementations\Repositories\PathRepository.cs" />
-    <Compile Include="Implementations\Repositories\PortRepository.cs" />
-    <Compile Include="Implementations\Repositories\QueryRepository.cs" />
-    <Compile Include="Implementations\Repositories\SchemeRepository.cs" />
-    <Compile Include="Implementations\Repositories\UrlMetadataRepository.cs" />
-    <Compile Include="Implementations\UnitOfWork.cs" />
-    <Compile Include="Implementations\Models\RawHtml.cs" />
-    <Compile Include="Interfaces\Repositories\IRawHtmlRepository.cs" />
-    <Compile Include="Implementations\Repositories\RawHtmlRepository.cs" />
-    <Compile Include="Implementations\Models\RawUrl.cs" />
     <Compile Include="Implementations\Entities\RawHostEntity.cs" />
     <Compile Include="Implementations\Entities\RawUrlEntity.cs" />
-    <Compile Include="Interfaces\Repositories\IRawHostRepository.cs" />
-    <Compile Include="Interfaces\Repositories\IRawUrlRepository.cs" />
-    <Compile Include="Implementations\Repositories\RawHostRepository.cs" />
-    <Compile Include="Implementations\Repositories\RawUrlRepository.cs" />
     <Compile Include="Implementations\Entities\CrawlableUrlEntity.cs" />
-    <Compile Include="Interfaces\Repositories\ICrawlableUrlRepository.cs" />
-    <Compile Include="Implementations\Repositories\CrawlableUrlRepository.cs" />
     <Compile Include="Implementations\Entities\RawHtmlEntity.cs" />
     <Compile Include="Implementations\ContextMagic.cs" />
+    <Compile Include="Implementations\Entities\CrawledHostEntity.cs" />
+    <Compile Include="Implementations\Entities\CrawledUrlEntity.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -93,9 +62,6 @@
   <ItemGroup>
     <Folder Include="Interfaces\" />
     <Folder Include="Implementations\" />
-    <Folder Include="Implementations\Models\" />
-    <Folder Include="Interfaces\Repositories\" />
-    <Folder Include="Implementations\Repositories\" />
     <Folder Include="Implementations\Repositories\" />
     <Folder Include="Implementations\Entities\" />
   </ItemGroup>
