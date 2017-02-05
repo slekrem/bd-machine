@@ -11,3 +11,7 @@ src/dal/bin
 src/dal/obj
 src/webApp/bin
 src/webApp/obj
+src/hostCrawler/bin
+src/hostCrawler/obj
+src/urlCrawler/bin
+src/urlCrawler/obj

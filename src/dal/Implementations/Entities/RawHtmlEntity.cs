@@ -19,6 +19,12 @@
 		[Required]
 		public byte[] Data { get; set; }
 
+		[Required]
+		public bool CrawledHosts { get; set; }
+
+		[Required]
+		public bool CrawledUrls { get; set; }
+
 		[ForeignKey("RawUrlId")]
 		public virtual RawUrlEntity RawUrl { get; set; }
 	}

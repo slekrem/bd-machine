@@ -16,9 +16,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Dockerfile-webapp = Dockerfile-webapp
 		Dockerfile-anaconda = Dockerfile-anaconda
 		Dockerfile-localtunnel = Dockerfile-localtunnel
+		Dockerfile-hostcrawler = Dockerfile-hostcrawler
+		Dockerfile-urlcrawler = Dockerfile-urlcrawler
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bd.machine.webApp", "src\webApp\bd.machine.webApp.csproj", "{66980DBA-9192-4971-819C-287434A000DD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bd.machine.hostCrawler", "src\hostCrawler\bd.machine.hostCrawler.csproj", "{1F6F9620-7EEE-437D-8197-53ACD8E26B6E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bd.machine.urlCrawler", "src\urlCrawler\bd.machine.urlCrawler.csproj", "{58251D3A-D781-4D15-8010-ADF894A9A3EC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -42,11 +48,21 @@ Global
 		{66980DBA-9192-4971-819C-287434A000DD}.Debug|x86.Build.0 = Debug|Any CPU
 		{66980DBA-9192-4971-819C-287434A000DD}.Release|x86.ActiveCfg = Release|Any CPU
 		{66980DBA-9192-4971-819C-287434A000DD}.Release|x86.Build.0 = Release|Any CPU
+		{1F6F9620-7EEE-437D-8197-53ACD8E26B6E}.Debug|x86.ActiveCfg = Debug|x86
+		{1F6F9620-7EEE-437D-8197-53ACD8E26B6E}.Debug|x86.Build.0 = Debug|x86
+		{1F6F9620-7EEE-437D-8197-53ACD8E26B6E}.Release|x86.ActiveCfg = Release|x86
+		{1F6F9620-7EEE-437D-8197-53ACD8E26B6E}.Release|x86.Build.0 = Release|x86
+		{58251D3A-D781-4D15-8010-ADF894A9A3EC}.Debug|x86.ActiveCfg = Debug|x86
+		{58251D3A-D781-4D15-8010-ADF894A9A3EC}.Debug|x86.Build.0 = Debug|x86
+		{58251D3A-D781-4D15-8010-ADF894A9A3EC}.Release|x86.ActiveCfg = Release|x86
+		{58251D3A-D781-4D15-8010-ADF894A9A3EC}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{AC8493F7-3C5E-4271-97AD-177D1EAAD801} = {70EACDE8-4167-4156-9816-D5184CFE0F4E}
 		{3783DC99-CFF9-48DD-ACEF-2C92ACF3C21E} = {70EACDE8-4167-4156-9816-D5184CFE0F4E}
 		{92D3609E-04D6-49C6-B885-0ABA2AB7579A} = {70EACDE8-4167-4156-9816-D5184CFE0F4E}
 		{66980DBA-9192-4971-819C-287434A000DD} = {70EACDE8-4167-4156-9816-D5184CFE0F4E}
+		{1F6F9620-7EEE-437D-8197-53ACD8E26B6E} = {70EACDE8-4167-4156-9816-D5184CFE0F4E}
+		{58251D3A-D781-4D15-8010-ADF894A9A3EC} = {70EACDE8-4167-4156-9816-D5184CFE0F4E}
 	EndGlobalSection
 EndGlobal

@@ -361,5 +361,15 @@
 			context.Entry(crawlableUrl).State = EntityState.Modified;
 			context.SaveChanges();
 		}
+
+		public static void UpdateRawHtml(this IContext context, RawHtmlEntity rawHtml) 
+		{
+			if (context == null)
+				throw new ArgumentNullException(nameof(context));
+			if (rawHtml == null)
+				throw new ArgumentNullException(nameof(rawHtml));
+			context.Entry(rawHtml).State = EntityState.Modified;
+			context.SaveChanges();
+		}
 	}
 }

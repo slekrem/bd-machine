@@ -6,9 +6,8 @@ RUN echo "deb http://download.mono-project.com/repo/debian wheezy main" | sudo t
 RUN apt-get update && apt-get install -y \
   mono-complete \
   wget \
-  unzip \
-  mono-xsp4
- 
+  unzip
+
 COPY . /root/bd-machine
 WORKDIR /root/bd-machine
 
@@ -16,5 +15,4 @@ RUN wget https://github.com/stefanmerkel/bd-machine/releases/download/0.1/packag
 RUN unzip packages.zip
 RUN xbuild bd.machine.sln
 
-WORKDIR /root/bd-machine/src/webApp
-ENTRYPOINT xsp4 --nonstop
+ENTRYPOINT mono src/urlcrawler/bin/Debug/bd.machine.urlcrawler.exe

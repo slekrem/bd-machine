@@ -17,7 +17,6 @@ services:
        - mysql_data:/var/lib/mysql
     environment:
       - MYSQL_ROOT_PASSWORD=toor
-      - MYSQL_DATABASE=BigData
     ports:
       - "3306:3306"
   crawler:
@@ -28,6 +27,22 @@ services:
       dockerfile: Dockerfile-crawler
     links:
       - torproxy
+      - mysql
+  hostcrawler:
+    container_name: hostcrawler
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile-hostcrawler
+    links:
+      - mysql
+  urlcrawler:
+    container_name: urlcrawler
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile-urlcrawler
+    links:
       - mysql
   webapp:
     container_name: webapp

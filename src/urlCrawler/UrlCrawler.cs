@@ -1,12 +1,12 @@
-﻿namespace bd.machine.crawler
+﻿namespace bd.machine.urlCrawler
 {
 	using System;
 	using System.Linq;
 	using System.Threading;
-	using bal.Implementations;
+	using bd.machine.bal.Implementations;
 	using dal.Implementations;
 
-	class Program
+	public class MainClass
 	{
 		private static bool _crawlerIsBusy;
 
@@ -29,21 +29,26 @@
 				using (var context = new Context("name=MySql"))
 				{
 					context
-						.CrawlableUrls
-						.Where(x => x.IsActivated == true)
+						.RawHtmls
+						.Where(rawHtml => rawHtml.CrawledUrls == false)
 						.ToList()
-						.ForEach(crawlableUrl =>
+						.ForEach(rawHtml =>
 					{
-						try 
+						try
 						{
-							crawlableUrl.ToUri()
-							            .GetHtmlAsByteArrayFromUri()
-							            .CreateRawHtmlFromByteArray(context, crawlableUrl.RawUrlId)
-							            .Log(x => string.Format("CreateRawHtmlFromByteArray: {0}", x.RawUrl.Data));
-							crawlableUrl.IsActivated = false;
-							context.UpdateCrawlableUrl(crawlableUrl);
-						} 
-						catch (Exception e) 
+							rawHtml
+								.Data
+								.ToHtmlString()
+								.ToHtmlDocument()
+								.GetAbsoluteUrls(rawHtml.RawUrl.Data.ToUri(UriKind.Absolute).Host)
+								.ToList()
+								.Select(x => context.CreateCrawledUrl(x, rawHtml.Id)
+								        .Log(y => string.Format("CreateCrawledUrl: {0}", y.RawUrl.Data)))
+								.ToList();
+							rawHtml.CrawledUrls = true;
+							context.UpdateRawHtml(rawHtml);
+						}
+						catch (Exception e)
 						{
 							Console.WriteLine(e.Message);
 						}
@@ -52,9 +57,8 @@
 			}
 			catch (Exception e)
 			{
-				Console.WriteLine(e.Message);
+				Console.WriteLine(e);
 			}
-			_crawlerIsBusy = false;
 		}
 	}
 }
