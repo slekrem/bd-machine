@@ -41,6 +41,7 @@
 								.GetHtmlAsByteArrayFromUri()
 								.CreateRawHtmlFromByteArray(context, crawlableUrl.RawUrlId)
 								.Log(x => string.Format("CreateRawHtmlFromByteArray: {0}", x.RawUrl.Data));
+							/*
 							var crawledUrls = rawHtmlEntity
 								.Data
 								.ToHtmlString()
@@ -59,6 +60,7 @@
 								.Select(x => context.GetOrCreateCrawlableUrl(x)
 										.Log(y => string.Format("GetOrCreateCrawlableUrl: {0}", y.RawUrl.Data)))
 								.ToList();
+							*/
 						} 
 						catch (Exception e) 
 						{

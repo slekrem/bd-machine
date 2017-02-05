@@ -36,8 +36,6 @@
 			var rawUrlEntity = _context.RawUrls.Find(id);
 			if (rawUrlEntity == null)
 				throw new NullReferenceException("rawUrlEntity");
-			var asd = _context.RawHtmls.Last(x => x.RawUrlId == rawUrlEntity.Id);
-
 			return View("Url", new HomeUrlViewModel() 
 			{
 				Id = id,
@@ -58,7 +56,7 @@
 				return View("Index", model);
 			}
 			var rawUrlEntity = _context.RawUrls
-					.SingleOrDefault(x => x.Data.ToLower() == uri.OriginalString.ToLower());
+			                           .FirstOrDefault(x => x.Data.ToLower() == uri.OriginalString.ToLower());
 			if (rawUrlEntity != null) 
 			{
 				_context.ActivateCrawlableUrl(rawUrlEntity.Id);
