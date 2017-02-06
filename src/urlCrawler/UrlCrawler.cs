@@ -3,7 +3,7 @@
 	using System;
 	using System.Linq;
 	using System.Threading;
-	using bd.machine.bal.Implementations;
+	using bal.Implementations;
 	using dal.Implementations;
 
 	public class MainClass
