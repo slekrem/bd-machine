@@ -15,4 +15,4 @@ RUN wget https://github.com/stefanmerkel/bd-machine/releases/download/0.1/packag
 RUN unzip packages.zip
 RUN xbuild bd.machine.sln
 
-ENTRYPOINT mono src/urlcrawler/bin/Debug/bd.machine.urlcrawler.exe
+ENTRYPOINT mono src/urlCrawler/bin/Debug/bd.machine.urlcrawler.exe
