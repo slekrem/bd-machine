@@ -26,6 +26,7 @@
 			_crawlerIsBusy = true;
 			try 
 			{
+				Console.WriteLine("start crawling hosts: " + DateTime.UtcNow);
 				using (var context = new Context("name=MySql")) 
 				{
 					context
@@ -36,6 +37,7 @@
 					{
 						try 
 						{
+							Console.WriteLine("Try start handle hosts: " + rawHtml.RawUrl.Data);
 							rawHtml
 								.Data
 								.ToHtmlString()
@@ -50,14 +52,14 @@
 						} 
 						catch (Exception e)
 						{
-							Console.WriteLine(e.Message);
+							Console.WriteLine("fail handle hosts: " + e.Message);
 						}
 					});
 				}
 			} 
 			catch (Exception e) 
 			{
-				Console.WriteLine(e);
+				Console.WriteLine("fail handle hosts: " + e.Message);
 			}
 		}
 	}

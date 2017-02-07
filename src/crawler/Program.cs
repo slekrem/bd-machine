@@ -26,6 +26,7 @@
 			_crawlerIsBusy = true;
 			try
 			{
+				Console.WriteLine("Try start html crawling - " + DateTime.UtcNow);
 				using (var context = new Context("name=MySql"))
 				{
 					context
@@ -36,6 +37,7 @@
 					{
 						try 
 						{
+							Console.WriteLine("Try start handle html: " + crawlableUrl.RawUrl.Data);
 							crawlableUrl.ToUri()
 							            .GetHtmlAsByteArrayFromUri()
 							            .CreateRawHtmlFromByteArray(context, crawlableUrl.RawUrlId)
@@ -45,14 +47,14 @@
 						} 
 						catch (Exception e) 
 						{
-							Console.WriteLine(e.Message);
+							Console.WriteLine("fail handle html: " + e.Message);
 						}
 					});
 				}
 			}
 			catch (Exception e)
 			{
-				Console.WriteLine(e.Message);
+				Console.WriteLine("fail html crawling: " + e.Message);
 			}
 			_crawlerIsBusy = false;
 		}
