@@ -1,107 +1,15 @@
 ﻿@model bd.machine.webApp.ViewModels.Home.HomeIndexViewModel
 
 <div class="row">
-	<div class="col-md-12">
+	<div class="col-lg-4 col-lg-offset-4">
 		<form action="/Home/Url" method="post">
-			<div class="form-group">
+			<div class="input-group">
 				@Html.AntiForgeryToken()
-				@Html.TextBoxFor(m => m.Url, new { type="url", @class="form-control", placeholder="https://bd-machine.smerkel.com/" })
+				@Html.TextBoxFor(m => m.Url, new { type="text", @class="form-control", placeholder="https://bd-machine.smerkel.com/" })
+				<span class="input-group-btn">
+					<button type="submit" class="btn btn-default">Go!</button>
+				</span>
 			</div>
 		</form>
 	</div>
 </div>
-
-<div class="row">
-	<div class="col-md-12">
-		<canvas id="canvas"></canvas>
-	</div>
-</div>
-
-@section Script{
-<script>
-	var randomScalingFactor = function() {
-		return Math.round(Math.random() * 100);
-	};
-	var randomColorFactor = function() {
-		return Math.round(Math.random() * 255);
-	};
-	var randomColor = function(opacity) {
-		return 'rgba(' + randomColorFactor() + ',' + randomColorFactor() + ',' + randomColorFactor() + ',' + (opacity || '.3') + ')';
-	};
-	var config = {
-		type: 'line',
-		data: {
-			labels: [ "Januar", "Februar", "März",
-				"April", "Mai", "Juni",
-				"Juli", "August", "September",
-				"Oktober", "November", "Dezember" ],
-		},
-		options: {
-			responsive: true,
-			title:{
-				display:true,
-				text:'Übersicht'
-			},
-			tooltips: {
-				mode: 'label',
-				callbacks: { }
-			},
-			hover: {
-				mode: 'dataset'
-			},
-			scales: {
-				xAxes: [{
-					display: true,
-					scaleLabel: {
-						display: true,
-						labelString: 'Monat'
-					}
-				}],
-				yAxes: [{
-					display: true,
-					scaleLabel: {
-						display: true,
-						labelString: 'Anzahl'
-					}
-				}]
-			}
-		}
-	};
-
-	window.onload = function() {
-		var ctx = document.getElementById("canvas").getContext("2d");
-		window.myLine = new Chart(ctx, config);
-	};
-
-	$.get("Api/RawHostsThisYearInMonths", function(data){
-		config.data.datasets.push({
-                    label: "Hosts",
-                    data: data,
-                    fill: false,
-                    borderDash: [5, 5],
-					borderColor: randomColor(0.4),
-					backgroundColor: randomColor(0.5),
-					pointBorderColor: randomColor(0.7),
-					pointBackgroundColor: randomColor(0.5),
-					pointBorderWidth: 1
-                });
-		window.myLine.update();
-	});
-
-	$.get("Api/RawUrlsThisYearInMonths", function(data){ 
-		config.data.datasets.push({
-                    label: "Urls",
-                    data: data,
-                    fill: false,
-                    borderDash: [5, 5],
-					borderColor: randomColor(0.4),
-					backgroundColor: randomColor(0.5),
-					pointBorderColor: randomColor(0.7),
-					pointBackgroundColor: randomColor(0.5),
-					pointBorderWidth: 1
-                });
-		window.myLine.update();
-	});
-	
-</script>
-}
