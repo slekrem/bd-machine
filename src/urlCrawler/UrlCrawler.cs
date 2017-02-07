@@ -44,7 +44,8 @@
 								.ToHtmlDocument()
 								.GetAbsoluteUrls(rawHtml.RawUrl.Data.ToUri(UriKind.Absolute).Host)
 								.ToList()
-								.Select(x => context.CreateCrawledUrl(x, rawHtml.Id)
+								.Select(x => context
+								        .CreateCrawledUrl(x, rawHtml.Id)
 								        .Log(y => string.Format("CreateCrawledUrl: {0}", y.RawUrl.Data)))
 								.ToList();
 							rawHtml.CrawledUrls = true;
@@ -56,6 +57,7 @@
 						}
 					});
 				}
+				Console.WriteLine("finished! " + DateTime.UtcNow);
 			}
 			catch (Exception e)
 			{

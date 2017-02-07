@@ -56,6 +56,7 @@
 						}
 					});
 				}
+				Console.WriteLine("finished! " + DateTime.UtcNow);
 			} 
 			catch (Exception e) 
 			{

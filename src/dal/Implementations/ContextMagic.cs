@@ -275,6 +275,9 @@
 			};
 			context.RawUrls.Add(rawUrlEntity);
 			context.SaveChanges();
+			var crawlableUrl = context.GetOrCreateCrawlableUrl(url);
+			crawlableUrl.IsActivated = true;
+			context.UpdateCrawlableUrl(crawlableUrl);
 			return rawUrlEntity;
 		}
 
