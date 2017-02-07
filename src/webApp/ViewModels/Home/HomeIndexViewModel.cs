@@ -4,7 +4,9 @@
 
 	public class HomeIndexViewModel
 	{
-		public string Url { get; set; }
+		public string Term { get; set; }
+
+		public HomeIndexResponseViewModel Response { get; set; }
 		
 		public IEnumerable<HomeIndexHostViewModel> Hosts { get; set; }
 	}

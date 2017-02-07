@@ -25,8 +25,33 @@
 		[HttpGet]
 		public ActionResult Index()
 		{
-			return View();
+			return View(new HomeIndexViewModel());
 		}
+
+		[HttpGet]
+		public ActionResult Magic(HomeIndexViewModel model) 
+		{
+			if (model == null)
+				throw new ArgumentNullException(nameof(model));
+			if (!ModelState.IsValid)
+				return View("Index", model);
+			var uri = model.Term.ToUriOrDefault();
+			if (uri == null)
+				return View("Index", model);
+			if (!uri.IsAbsoluteUri)
+				return View("Index", model);
+			var rawUrlEntity = _context.GetOrCreateRawUrlEntity(uri);
+			var crawlableUrls = _context.GetOrCreateCrawlableUrl(uri);
+			crawlableUrls.IsActivated = true;
+			_context.UpdateCrawlableUrl(crawlableUrls);
+			model.Response = new HomeIndexResponseViewModel() 
+			{
+				UrlId = rawUrlEntity.Id,
+				Id = _context.RawHtmls.FirstOrDefault(x => x.RawUrlId == rawUrlEntity.Id)?.Id
+			};
+			return View("Index", model);
+		}
+
 
 		[HttpGet]
 		public new ActionResult Url(int id) 
@@ -49,7 +74,7 @@
 		{
 			if (model == null)
 				throw new ArgumentNullException("model");
-			var uri = model.Url.ToAbsoluteUriOrDefault();
+			var uri = model.Term.ToAbsoluteUriOrDefault();
 			if (uri == null)
 			{
 				ModelState.AddModelError(string.Empty, "url is empty");

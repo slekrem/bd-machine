@@ -1,15 +1,27 @@
 ﻿@model bd.machine.webApp.ViewModels.Home.HomeIndexViewModel
 
+<div class="center-block">
+	<div class="row">
+		<div class="col-lg-4 col-lg-offset-4">
+			<form action="/go/magic" method="get">
+				<div class="input-group">
+					@Html.TextBoxFor(m => m.Term, new { type="text", @class="form-control", placeholder="https://asd01.localtunnel.me" })
+					<span class="input-group-btn">
+						<button type="submit" class="btn btn-default">Go!</button>
+					</span>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+@if(Model.Response == null) { return; }
+@if(!Model.Response.UrlId.HasValue) { return; }
+
 <div class="row">
-	<div class="col-lg-4 col-lg-offset-4">
-		<form action="/Home/Url" method="post">
-			<div class="input-group">
-				@Html.AntiForgeryToken()
-				@Html.TextBoxFor(m => m.Url, new { type="text", @class="form-control", placeholder="https://bd-machine.smerkel.com/" })
-				<span class="input-group-btn">
-					<button type="submit" class="btn btn-default">Go!</button>
-				</span>
-			</div>
-		</form>
+	<div class="col-md-12">
+		<div class="panel panel-default">
+			<div class="panel-body">@Model.Response.UrlId</div>
+		</div>
 	</div>
 </div>

@@ -132,6 +132,7 @@
     <Compile Include="ViewModels\Url\HtmlModel.cs" />
     <Compile Include="ViewModels\Home\HomeUrlViewModel.cs" />
     <Compile Include="Controllers\ApiController.cs" />
+    <Compile Include="ViewModels\Home\HomeIndexResponseViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Web.config" />

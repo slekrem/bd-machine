@@ -6,7 +6,7 @@
 	using bal.Implementations;
 	using dal.Implementations;
 
-	class Program
+	class HostCrawler
 	{
 		private static bool _crawlerIsBusy;
 
