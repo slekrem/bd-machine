@@ -20,8 +20,31 @@
 
 <div class="row">
 	<div class="col-md-12">
+		<iframe scrolling="no" style="border: 0; width: 728px; height: 90px;" src="//coinurl.com/get.php?id=61178"></iframe>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-12">
 		<div class="panel panel-default">
-			<div class="panel-body">@Model.Response.UrlId</div>
+			<div class="panel-body">
+				<table class="table">
+					<thead>
+						<tr>
+							<th>Url</th>
+						</tr>
+					</thead>
+					<tbody>
+						@foreach(var url in Model.Response.Urls) {
+						<tr>
+							<td>
+								<a href="/go/magic?Term=@Url.Encode(url)">@url</a>
+							</td>
+						</tr>
+						}
+					</tbody>
+				</table>
+			</div>
 		</div>
 	</div>
 </div>

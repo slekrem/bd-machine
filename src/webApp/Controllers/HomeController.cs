@@ -44,10 +44,20 @@
 			var crawlableUrls = _context.GetOrCreateCrawlableUrl(uri);
 			crawlableUrls.IsActivated = true;
 			_context.UpdateCrawlableUrl(crawlableUrls);
-			model.Response = new HomeIndexResponseViewModel() 
+			var rawHtmlEntity = _context.GetLastRawHtmlOrDefault(x => x.RawUrlId == rawUrlEntity.Id);
+			if (rawHtmlEntity == null)
+				return View("Index", model);
+			model.Response = new HomeIndexResponseViewModel()
 			{
 				UrlId = rawUrlEntity.Id,
-				Id = _context.RawHtmls.FirstOrDefault(x => x.RawUrlId == rawUrlEntity.Id)?.Id
+				Urls = _context
+					.CrawledUrls
+					.Where(x => x.RawHtmlId == rawHtmlEntity.Id)
+					.Select(x => x.RawUrlId)
+					.Distinct()
+					.ToList()
+					.Select(x => _context.RawUrls.Find(x).Data)
+					.ToList()
 			};
 			return View("Index", model);
 		}

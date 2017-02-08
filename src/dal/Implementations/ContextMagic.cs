@@ -281,6 +281,15 @@
 			return rawUrlEntity;
 		}
 
+		public static RawHtmlEntity GetLastRawHtmlOrDefault(this IContext context, Func<RawHtmlEntity, bool> func)
+		{
+			if (context == null)
+				throw new ArgumentNullException(nameof(context));
+			return context.RawHtmls
+						  .OrderByDescending(x => x.Id)
+						  .FirstOrDefault(func);
+		}
+
 		public static RawUrlEntity GetRawUrlOrDefault(this IContext context, Uri url) 
 		{
 			if (context == null)
