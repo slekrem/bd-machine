@@ -63,6 +63,7 @@
 			{
 				Console.WriteLine("fail crawling urls: " + e.Message);
 			}
+			_crawlerIsBusy = false;
 		}
 	}
 }
