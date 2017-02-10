@@ -19,6 +19,10 @@
 
 		public DbSet<CrawledUrlEntity> CrawledUrls { get; set; }
 
+		public DbSet<RawTitleEntity> RawTitles { get; set; }
+
+		public DbSet<CrawledTitleEntity> CrawledTitles { get; set; }
+
 		public Context(string connectionString)
 			: base(connectionString) { }
 	}

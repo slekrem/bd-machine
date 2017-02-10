@@ -1,22 +1,21 @@
-﻿namespace bd.machine.urlCrawler
+﻿namespace bd.machine.titleCrawler
 {
 	using System;
 	using System.Linq;
 	using System.Threading;
 	using bal.Implementations;
 	using dal.Implementations;
+	using dal.Implementations.Entities;
 
-	public class MainClass
+	class titleCrawler
 	{
 		private static bool _crawlerIsBusy;
 
 		public static void Main(string[] args)
 		{
+			Console.WriteLine("Press \'q\' to quit the sample.");
 			using (var timer = new Timer(StartCrawling, null, 0, 600000))
-			{
-				Console.WriteLine("Press \'q\' to quit the sample.");
 				while (Console.Read() != 'q') { }
-			}
 		}
 
 		private static void StartCrawling(object state)
@@ -26,30 +25,35 @@
 			_crawlerIsBusy = true;
 			try
 			{
-				Console.WriteLine("start crawling urls: " + DateTime.UtcNow);
+				Console.WriteLine("start crawling titles: " + DateTime.UtcNow);
 				using (var context = new Context("name=MySql"))
 				{
 					context
 						.RawHtmls
-						.Where(rawHtml => rawHtml.CrawledUrls == false)
+						.Where(rawHtml => rawHtml.CrawledTitle == false)
 						.ToList()
 						.ForEach(rawHtml =>
 					{
 						try
 						{
-							Console.WriteLine("Try start handle urls: " + rawHtml.RawUrl.Data);
-							rawHtml
+							Console.WriteLine("Try start handle html: " + rawHtml.RawUrl.Data);
+							var title = rawHtml
 								.Data
 								.ToHtmlString()
 								.ToHtmlDocument()
-								.GetAbsoluteUrls(rawHtml.RawUrl.Data.ToUri(UriKind.Absolute).Host)
-								.ToList()
-								.Select(x => context
-								        .CreateCrawledUrl(x, rawHtml.Id)
-								        .Log(y => string.Format("CreateCrawledUrl: {0}", y.RawUrl.Data)))
-								.ToList();
-							rawHtml.CrawledUrls = true;
+								.GetHtmlTitleOrDefault();
+							rawHtml.CrawledTitle = true;
 							context.UpdateRawHtml(rawHtml);
+							if (title == null)
+								return;
+							var rawTitle = context.GetOrCreateRawTitle(rawHtml.RawUrlId, title);
+							context.CreateCrawledTitle(new CrawledTitleEntity() 
+							{
+								RawHtmlId = rawHtml.Id,
+								RawTitleId = rawTitle.Id,
+								UtcTimestamp = DateTime.UtcNow
+							});
+							Console.WriteLine("created successful title: " + rawTitle.Data);
 						}
 						catch (Exception e)
 						{

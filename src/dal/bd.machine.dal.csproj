@@ -55,6 +55,8 @@
     <Compile Include="Implementations\ContextMagic.cs" />
     <Compile Include="Implementations\Entities\CrawledHostEntity.cs" />
     <Compile Include="Implementations\Entities\CrawledUrlEntity.cs" />
+    <Compile Include="Implementations\Entities\RawTitleEntity.cs" />
+    <Compile Include="Implementations\Entities\CrawledTitleEntity.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -62,7 +64,6 @@
   <ItemGroup>
     <Folder Include="Interfaces\" />
     <Folder Include="Implementations\" />
-    <Folder Include="Implementations\Repositories\" />
     <Folder Include="Implementations\Entities\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

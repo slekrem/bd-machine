@@ -13,11 +13,15 @@
 
 		DbSet<RawUrlEntity> RawUrls { get; set; }
 
+		DbSet<RawTitleEntity> RawTitles { get; set; }
+
 		DbSet<CrawlableUrlEntity> CrawlableUrls { get; set; }
 
 		DbSet<CrawledHostEntity> CrawledHosts { get; set; }
 
 		DbSet<CrawledUrlEntity> CrawledUrls { get; set; }
+
+		DbSet<CrawledTitleEntity> CrawledTitles { get; set; }
 
 		int SaveChanges();
 

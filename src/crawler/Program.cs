@@ -37,6 +37,9 @@
 					{
 						try 
 						{
+							var onionUri = crawlableUrl.ToUri();
+							if (!onionUri.Host.ToLower().Contains(".onion"))
+								return;
 							Console.WriteLine("Try start handle html: " + crawlableUrl.RawUrl.Data);
 							crawlableUrl.ToUri()
 							            .GetHtmlAsByteArrayFromUri()
@@ -48,6 +51,10 @@
 						catch (Exception e) 
 						{
 							Console.WriteLine("fail handle html: " + e.Message);
+							if(e.InnerException != null)
+								Console.WriteLine(e.InnerException.Message);
+							crawlableUrl.IsActivated = false;
+							context.UpdateCrawlableUrl(crawlableUrl);
 						}
 					});
 				}
@@ -56,8 +63,10 @@
 			catch (Exception e)
 			{
 				Console.WriteLine("fail html crawling: " + e.Message);
+				Console.WriteLine("problem with database ...");
 			}
 			_crawlerIsBusy = false;
+			Console.WriteLine("end onion crawler ...");
 		}
 	}
 }

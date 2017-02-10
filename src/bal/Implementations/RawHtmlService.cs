@@ -166,6 +166,17 @@
 			return htmlDocument;
 		}
 
+		public static string GetHtmlTitleOrDefault(this HtmlDocument htmlDocument) 
+		{
+			if (htmlDocument == null)
+				throw new ArgumentNullException(nameof(htmlDocument));
+			return htmlDocument
+				.DocumentNode
+				.Descendants("title")
+				.FirstOrDefault()?
+				.InnerText;
+		}
+
 		public static IEnumerable<string> GetTextLines(this HtmlDocument htmlDocument)
 		{
 			if (htmlDocument == null)

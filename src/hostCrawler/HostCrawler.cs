@@ -63,6 +63,7 @@
 				Console.WriteLine("fail handle hosts: " + e.Message);
 			}
 			_crawlerIsBusy = false;
+			Console.WriteLine("crawler is done!");
 		}
 	}
 }

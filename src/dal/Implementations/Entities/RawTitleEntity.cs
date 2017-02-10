@@ -4,8 +4,8 @@
 	using System.ComponentModel.DataAnnotations;
 	using System.ComponentModel.DataAnnotations.Schema;
 
-	[Table("RawHtml")]
-	public class RawHtmlEntity
+	[Table("RawTitle")]
+	public class RawTitleEntity
 	{
 		[Key]
 		public int Id { get; set; }
@@ -14,19 +14,10 @@
 		public int RawUrlId { get; set; }
 
 		[Required]
-		public DateTime Timestamp { get; set; }
+		public DateTime UtcTimestamp { get; set; }
 
 		[Required]
-		public byte[] Data { get; set; }
-
-		[Required]
-		public bool CrawledHosts { get; set; }
-
-		[Required]
-		public bool CrawledUrls { get; set; }
-
-		[Required]
-		public bool CrawledTitle { get; set; }
+		public string Data { get; set; }
 
 		[ForeignKey("RawUrlId")]
 		public virtual RawUrlEntity RawUrl { get; set; }

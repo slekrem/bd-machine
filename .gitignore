@@ -15,3 +15,7 @@ src/hostCrawler/bin
 src/hostCrawler/obj
 src/urlCrawler/bin
 src/urlCrawler/obj
+src/titleCrawler/bin
+src/titleCrawler/obj
+src/webAppBot/bin
+src/webAppBot/obj

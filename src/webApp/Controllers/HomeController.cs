@@ -31,6 +31,11 @@
 		[HttpGet]
 		public ActionResult Magic(HomeIndexViewModel model) 
 		{
+			var httpMethod = Request.HttpMethod;
+			var rawUrl = Request.RawUrl;
+			var userHostName = Request.UserHostName;
+			var userHostAddress = Request.UserHostAddress;
+
 			if (model == null)
 				throw new ArgumentNullException(nameof(model));
 			if (!ModelState.IsValid)

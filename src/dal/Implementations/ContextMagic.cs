@@ -129,6 +129,39 @@
 			return crawledUrlEntity;
 		}
 
+		public static CrawledTitleEntity CreateCrawledTitle(this IContext context, CrawledTitleEntity crawledTitle)
+		{
+			if (context == null)
+				throw new ArgumentNullException(nameof(context));
+			context.CrawledTitles.Add(crawledTitle);
+			context.SaveChanges();
+			return crawledTitle;
+		}
+
+		public static RawTitleEntity GetOrCreateRawTitle(this IContext context, int rawUrlId, string title) 
+		{
+			if (context == null)
+				throw new ArgumentNullException(nameof(context));
+			if (rawUrlId <= 0)
+				throw new ArgumentOutOfRangeException("rawUrlId");
+			if (string.IsNullOrWhiteSpace(title))
+				throw new ArgumentNullException(nameof(title));
+			var rawTitle = context
+				.RawTitles
+				.FirstOrDefault(x => x.RawUrlId == rawUrlId && x.Data.ToLower() == title.ToLower());
+			if (rawTitle != null)
+				return rawTitle;
+			rawTitle = new RawTitleEntity()
+			{
+				Data = title,
+				RawUrlId = rawUrlId,
+				UtcTimestamp = DateTime.UtcNow
+			};
+			context.RawTitles.Add(rawTitle);
+			context.SaveChanges();
+			return rawTitle;
+		}
+
 		public static CrawledHostEntity CreateCrawledHost(this IContext context, Uri uri, int rawHtmlId) 
 		{
 			if (context == null)
