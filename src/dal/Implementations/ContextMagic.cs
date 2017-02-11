@@ -138,6 +138,28 @@
 			return crawledTitle;
 		}
 
+		public static RawDescriptionEntity CreateRawDescription(this IContext context, RawDescriptionEntity rawDescription) 
+		{
+			if (context == null)
+				throw new ArgumentNullException(nameof(context));
+			if (rawDescription == null)
+				throw new ArgumentNullException(nameof(rawDescription));
+			context.RawDescriptions.Add(rawDescription);
+			context.SaveChanges();
+			return rawDescription;
+		}
+
+		public static CrawledDescriptionEntity CreateCrawledDescription(this IContext context, CrawledDescriptionEntity crawledDescriptionEntity) 
+		{
+			if (context == null)
+				throw new ArgumentNullException(nameof(context));
+			if (crawledDescriptionEntity == null)
+				throw new ArgumentNullException(nameof(crawledDescriptionEntity));
+			context.CrawledDescriptions.Add(crawledDescriptionEntity);
+			context.SaveChanges();
+			return crawledDescriptionEntity;
+		}
+
 		public static RawTitleEntity GetOrCreateRawTitle(this IContext context, int rawUrlId, string title) 
 		{
 			if (context == null)
@@ -249,7 +271,11 @@
 			{
 				Data = htmlByteArray,
 				RawUrlId = rawUrlId,
-				Timestamp = DateTime.UtcNow
+				Timestamp = DateTime.UtcNow,
+				CrawledUrls = false,
+				CrawledDescription = false,
+				CrawledHosts = false,
+				CrawledTitle = false
 			};
 			context.RawHtmls.Add(rawHtmlEntity);
 			context.SaveChanges();

@@ -166,6 +166,20 @@
 			return htmlDocument;
 		}
 
+		public static string GetHtmlDescriptionOrDefault(this HtmlDocument htmlDocument)
+		{
+			if (htmlDocument == null)
+				throw new ArgumentNullException(nameof(htmlDocument));
+			try
+			{
+				return htmlDocument
+					.DocumentNode
+					.SelectSingleNode("//meta[@name='description']")?
+					.Attributes["content"]?.Value;
+			}
+			catch { return null; }
+		}
+
 		public static string GetHtmlTitleOrDefault(this HtmlDocument htmlDocument) 
 		{
 			if (htmlDocument == null)

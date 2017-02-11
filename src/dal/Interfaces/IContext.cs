@@ -25,6 +25,8 @@
 
 		DbSet<CrawledTitleEntity> CrawledTitles { get; set; }
 
+		DbSet<CrawledDescriptionEntity> CrawledDescriptions { get; set; }
+
 		int SaveChanges();
 
 		DbEntityEntry Entry(object entity);

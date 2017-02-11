@@ -58,6 +58,7 @@
     <Compile Include="Implementations\Entities\RawTitleEntity.cs" />
     <Compile Include="Implementations\Entities\CrawledTitleEntity.cs" />
     <Compile Include="Implementations\Entities\RawDescriptionEntity.cs" />
+    <Compile Include="Implementations\Entities\CrawledDescriptionEntity.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

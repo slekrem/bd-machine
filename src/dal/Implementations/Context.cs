@@ -25,6 +25,8 @@
 
 		public DbSet<CrawledTitleEntity> CrawledTitles { get; set; }
 
+		public DbSet<CrawledDescriptionEntity> CrawledDescriptions { get; set; }
+
 		public Context(string connectionString)
 			: base(connectionString) { }
 	}

@@ -28,6 +28,9 @@
 		[Required]
 		public bool CrawledTitle { get; set; }
 
+		[Required]
+		public bool CrawledDescription { get; set; }
+
 		[ForeignKey("RawUrlId")]
 		public virtual RawUrlEntity RawUrl { get; set; }
 	}

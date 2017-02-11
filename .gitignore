@@ -19,3 +19,5 @@ src/titleCrawler/bin
 src/titleCrawler/obj
 src/webAppBot/bin
 src/webAppBot/obj
+src/bd.machine.descriptionCrawler/bin
+src/bd.machine.descriptionCrawler/obj

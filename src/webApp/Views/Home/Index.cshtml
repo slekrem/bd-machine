@@ -28,7 +28,7 @@
 		@foreach(var searchResult in Model.SearchResults) {
 		<blockquote>
 			<h4>@searchResult.Title</h4>
-			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+			<p>@searchResult.Description</p>
 			<footer><a href="@searchResult.Url">@searchResult.Url</a></footer>
 		</blockquote>
 		}
