@@ -49,7 +49,7 @@ services:
     links:
       - mysql
   descriptioncrawler:
-  container_name: descriptioncrawler
+    container_name: descriptioncrawler
     build:
       context: .
       dockerfile: Dockerfile-descriptioncrawler
