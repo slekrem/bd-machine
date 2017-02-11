@@ -42,7 +42,7 @@ services:
     links:
       - mysql
   titlecrawler:
-  	container_name: titlecrawler
+    container_name: titlecrawler
     build:
       context: .
       dockerfile: Dockerfile-titlecrawler
