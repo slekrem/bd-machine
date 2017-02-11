@@ -54,7 +54,12 @@
 						Title = _context
 							.RawTitles
 							.OrderByDescending(x => x.RawUrlId == rawUrlId)
-							.FirstOrDefault()
+							.FirstOrDefault()?
+							.Data,
+						Description = _context
+							.RawDescriptions
+							.OrderByDescending(x => x.RawUrlId == rawUrlId)
+							.FirstOrDefault()?
 							.Data,
 						Url = _context
 							.RawUrls.Find(rawUrlId).Data
