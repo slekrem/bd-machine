@@ -29,13 +29,49 @@
 		}
 
 		[HttpGet]
-		public ActionResult Magic(HomeIndexViewModel model) 
+		public ActionResult Magic(string term) 
 		{
-			var httpMethod = Request.HttpMethod;
-			var rawUrl = Request.RawUrl;
-			var userHostName = Request.UserHostName;
-			var userHostAddress = Request.UserHostAddress;
+			if (string.IsNullOrWhiteSpace(term))
+				return View("Index", new HomeIndexViewModel());
 
+			var urls = _context
+				.RawTitles
+				.Where(x => x.Data.Contains(term))
+				.Select(x => x.RawUrlId)
+				.ToList()
+				.Select(x => _context.RawUrls.Find(x).Data)
+				.ToList();
+
+			return View("Index", new HomeIndexViewModel()
+			{
+				SearchResults = _context
+					.RawTitles
+					.Where(x => x.Data.Contains(term))
+					.Select(x => x.RawUrlId)
+					.ToList()
+					.Select(rawUrlId => new SearchResult()
+					{
+						Title = _context
+							.RawTitles
+							.OrderByDescending(x => x.RawUrlId == rawUrlId)
+							.FirstOrDefault()
+							.Data,
+						Url = _context
+							.RawUrls.Find(rawUrlId).Data
+					})
+			});
+		}
+
+
+
+
+
+
+
+
+		[HttpGet]
+		public ActionResult MagicA(HomeIndexViewModel model) 
+		{
 			if (model == null)
 				throw new ArgumentNullException(nameof(model));
 			if (!ModelState.IsValid)

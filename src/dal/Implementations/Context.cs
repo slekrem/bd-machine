@@ -13,13 +13,15 @@
 
 		public DbSet<RawUrlEntity> RawUrls { get; set; }
 
+		public DbSet<RawTitleEntity> RawTitles { get; set; }
+
+		public DbSet<RawDescriptionEntity> RawDescriptions { get; set; }
+
 		public DbSet<CrawlableUrlEntity> CrawlableUrls { get; set; }
 
 		public DbSet<CrawledHostEntity> CrawledHosts { get; set; }
 
 		public DbSet<CrawledUrlEntity> CrawledUrls { get; set; }
-
-		public DbSet<RawTitleEntity> RawTitles { get; set; }
 
 		public DbSet<CrawledTitleEntity> CrawledTitles { get; set; }
 

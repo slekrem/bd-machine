@@ -15,6 +15,8 @@
 
 		DbSet<RawTitleEntity> RawTitles { get; set; }
 
+		DbSet<RawDescriptionEntity> RawDescriptions { get; set; }
+
 		DbSet<CrawlableUrlEntity> CrawlableUrls { get; set; }
 
 		DbSet<CrawledHostEntity> CrawledHosts { get; set; }

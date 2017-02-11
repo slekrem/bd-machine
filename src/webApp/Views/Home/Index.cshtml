@@ -15,8 +15,7 @@
 	</div>
 </div>
 
-@if(Model.Response == null) { return; }
-@if(!Model.Response.UrlId.HasValue) { return; }
+@if(Model.SearchResults == null) { return; }
 
 <div class="row">
 	<div class="col-md-12">
@@ -26,25 +25,12 @@
 
 <div class="row">
 	<div class="col-md-12">
-		<div class="panel panel-default">
-			<div class="panel-body">
-				<table class="table">
-					<thead>
-						<tr>
-							<th>Url</th>
-						</tr>
-					</thead>
-					<tbody>
-						@foreach(var url in Model.Response.Urls) {
-						<tr>
-							<td>
-								<a href="/go/magic?Term=@Url.Encode(url)">@url</a>
-							</td>
-						</tr>
-						}
-					</tbody>
-				</table>
-			</div>
-		</div>
+		@foreach(var searchResult in Model.SearchResults) {
+		<blockquote>
+			<h4>@searchResult.Title</h4>
+			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+			<footer><a href="@searchResult.Url">@searchResult.Url</a></footer>
+		</blockquote>
+		}
 	</div>
 </div>
