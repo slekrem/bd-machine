@@ -21,7 +21,6 @@ services:
       - "3306:3306"
   crawler:
     container_name: crawler
-    restart: always
     build:
       context: .
       dockerfile: Dockerfile-crawler
@@ -30,7 +29,6 @@ services:
       - mysql
   hostcrawler:
     container_name: hostcrawler
-    restart: always
     build:
       context: .
       dockerfile: Dockerfile-hostcrawler
@@ -38,10 +36,23 @@ services:
       - mysql
   urlcrawler:
     container_name: urlcrawler
-    restart: always
     build:
       context: .
       dockerfile: Dockerfile-urlcrawler
+    links:
+      - mysql
+  titlecrawler:
+  	container_name: titlecrawler
+    build:
+      context: .
+      dockerfile: Dockerfile-titlecrawler
+    links:
+      - mysql
+  descriptioncrawler:
+  	container_name: descriptioncrawler
+    build:
+      context: .
+      dockerfile: Dockerfile-descriptioncrawler
     links:
       - mysql
   webapp:
@@ -64,14 +75,5 @@ services:
       - webapp
     command:
       lt --local-host webapp --port 9000 --subdomain asd01
-  #anaconda:
-    #container_name: anaconda
-    #restart: always
-    #build:
-      #context: .
-      #dockerfile: Dockerfile-anaconda
-    #ports:
-      #- "8888:8888"
-    #command: /opt/conda/bin/conda install jupyter -y --quiet && mkdir /opt/notebooks && /opt/conda/bin/jupyter notebook --notebook-dir=/opt/notebooks --ip='*' --port=8888 --no-browser
 volumes:
     mysql_data:

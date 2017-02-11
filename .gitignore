@@ -21,3 +21,5 @@ src/webAppBot/bin
 src/webAppBot/obj
 src/bd.machine.descriptionCrawler/bin
 src/bd.machine.descriptionCrawler/obj
+src/descriptionCrawler/bin
+src/descriptionCrawler/obj

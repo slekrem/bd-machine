@@ -18,6 +18,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Dockerfile-localtunnel = Dockerfile-localtunnel
 		Dockerfile-hostcrawler = Dockerfile-hostcrawler
 		Dockerfile-urlcrawler = Dockerfile-urlcrawler
+		Dockerfile-descriptioncrawler = Dockerfile-descriptioncrawler
+		Dockerfile-titlecrawler = Dockerfile-titlecrawler
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bd.machine.webApp", "src\webApp\bd.machine.webApp.csproj", "{66980DBA-9192-4971-819C-287434A000DD}"
@@ -38,7 +40,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "common", "common", "{354AB1
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "webApps", "webApps", "{6599B485-EE4E-4387-BE1E-B123C525B625}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bd.machine.descriptionCrawler", "src\bd.machine.descriptionCrawler\bd.machine.descriptionCrawler.csproj", "{673017AF-A681-4039-84CB-5191AD7C7816}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bd.machine.descriptionCrawler", "src\descriptionCrawler\bd.machine.descriptionCrawler.csproj", "{673017AF-A681-4039-84CB-5191AD7C7816}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
