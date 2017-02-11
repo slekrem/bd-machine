@@ -105,11 +105,19 @@
 	{
 		public static HttpClient CreateHttpClient()
 		{
-			return new HttpClient(new HttpClientHandler()
+			var httpClient = new HttpClient(new HttpClientHandler()
 			{
 				Proxy = new WebProxy("torproxy", 8118),
-				UseProxy = true
+				UseProxy = true,
+				AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate
 			});
+			httpClient.DefaultRequestHeaders.Add("Connection", "keep-alive");
+			httpClient.DefaultRequestHeaders.Add("Pragma", "no-cache");
+			httpClient.DefaultRequestHeaders.Add("Cache-Control", "no-cache");
+			httpClient.DefaultRequestHeaders.Add("Upgrade-Insecure-Requests", "1");
+			httpClient.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36");
+			httpClient.DefaultRequestHeaders.Add("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
+			return httpClient;
 		}
 		
 		public static byte[] GetHtmlAsByteArrayFromUri(this Uri uri) 
